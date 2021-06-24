@@ -1,0 +1,14 @@
+{
+    "name": "wanderers-guide-character-importer",
+    "title": "Wanderer's Guide Character Importer",
+    "description": "Allows you to import characters exported from https://wanderersguide.app into your games",
+    "author": "BLittle1996",
+    "version": "0.0.1",
+    "minimumCoreVersion": "0.8.7",
+    "compatibleCoreVersion": "0.8.7",
+    "system": [
+        "pf2e"
+    ],
+    "url": "https://github.com/bLittle1996/foundry-vtt-wanderers-guide-character-import",
+    "license": "./LICENSE"
+}

@@ -10,5 +10,6 @@
         "pf2e"
     ],
     "url": "https://github.com/bLittle1996/foundry-vtt-wanderers-guide-character-import",
-    "license": "./LICENSE"
+    "license": "./LICENSE",
+    "manifest": "https://raw.githubusercontent.com/bLittle1996/foundry-vtt-wanderers-guide-character-import/main/module.json"
 }

@@ -1,4 +1,15 @@
 import { Exact } from "../utils/types";
+import {
+  Ability,
+  AttackType,
+  Class,
+  DefenseType,
+  ProficiencyLevel,
+  SavingThrow,
+  Skill,
+  SpellDC,
+  SpellLevel,
+} from "./system";
 
 type ScuffedBool = 0 | 1;
 
@@ -6,10 +17,31 @@ export type WanderersGuideObject = {
   version: number;
   animalCompanions: [];
   build: WGBuild;
-  character: {};
-  spellBookSpells: [];
-  stats: {};
+  character: WGCharacter;
+  spellBookSpells: WGSpell[];
+  stats: WGStats;
 };
+
+type JsonString = string;
+export type WGStats = Timestamped<{
+  maxHP: number;
+  totalAC: number;
+  totalAbilityScores: JsonString;
+  totalClassDC: number;
+  totalPerception: number;
+  totalSaves: JsonString;
+  totalSkills: JsonString;
+  totalSpeed: number;
+  weapons: JsonString;
+}>;
+
+export type WGSpell = Timestamped<{
+  id: number;
+  spellID: number;
+  spellLevel: SpellLevel;
+  spellSRC: Uppercase<Class>;
+  _spellName: string;
+}>;
 
 export type WGCharacter = Timestamped<{
   level: number;
@@ -25,30 +57,6 @@ export type WGCharacter = Timestamped<{
   _heritage: WGHeritage;
 }>;
 
-export type Class = CRBClass | GunsAndGearsClass | SecretsOfMagicClass;
-export type GunsAndGearsClass = "Gunslinger" | "Inventor";
-export type SecretsOfMagicClass = "Magus" | "Summoner";
-export type CRBClass =
-  | "Alchemist"
-  | "Barbarian"
-  | "Bard"
-  | "Champion"
-  | "Cleric"
-  | "Druid"
-  | "Fighter"
-  | "Gunslinger"
-  | "Inventor"
-  | "Investigator"
-  | "Monk"
-  | "Oracle"
-  | "Ranger"
-  | "Rogue"
-  | "Sorcerer"
-  | "Swashbuckler"
-  | "Witch"
-  | "Wizard";
-export type WGClassIdMap = Record<number, Class>;
-
 export type WGAncestry = {
   description: string;
   hitPoints: number;
@@ -62,7 +70,7 @@ export type WGBackground = {
 };
 
 export type WGClass = {
-  name: string;
+  name: Class;
   description: string;
   hitPoints: number;
 };
@@ -141,40 +149,6 @@ export type WGWeaponProficiency = Exact<
   }
 >;
 
-// We don't need proficiencies for specific weapons and stuff because that shit is automatically handled by pf2e
-export type SpellType = "Occult" | "Primal" | "Divine" | "Arcane";
-export type SpellDC = `${SpellType}SpellDCs`;
-export type ProficiencyLevel = "T" | "E" | "M" | "L";
-export type SavingThrow = "Will" | "Reflex" | "Fortitude";
-export type AttackType =
-  | "Unarmed_Attacks"
-  | "Simple_Weapons"
-  | "Martial_Weapons"
-  | "Advanced_Weapons";
-export type DefenseType =
-  | "Unarmored_Defense"
-  | "Light_Armor"
-  | "Medium_Armor"
-  | "Heavy_Armor";
-export type Skill =
-  | "Acrobatics"
-  | "Arcana"
-  | "Athletics"
-  | "Crafting"
-  | "Deception"
-  | "Diplomacy"
-  | "Intimidation"
-  | "Medicine"
-  | "Nature"
-  | "Occultism"
-  | "Performance"
-  | "Religion"
-  | "Society"
-  | "Stealth"
-  | "Survival"
-  | "Thievery"
-  | `${string}_LORE`;
-
 export type WGLanguage = Sourceable<
   {
     charID: number;
@@ -216,7 +190,6 @@ export type WGBoost = Sourceable<
   { source: "abilityBonus" }
 >;
 
-export type Ability = "STR" | "DEX" | "CON" | "WIS" | "INT" | "CHA";
 export type BonusType = "Boost" | "Flaw";
 
 export type SourceType =

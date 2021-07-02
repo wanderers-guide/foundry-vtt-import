@@ -1,3 +1,4 @@
+import { Ability, AbilityName } from "../types/system";
 import { WGClassIdMap } from "../types/wanderers-guide-types";
 
 export const classIdMap: WGClassIdMap = {
@@ -30,3 +31,23 @@ export const getClassId = (className: string): number | undefined => {
 
   return classId ? +classId : undefined;
 };
+
+export const getAbilityName = (ability: Ability): AbilityName => {
+  switch (ability) {
+    case "STR":
+      return "Strength";
+    case "DEX":
+      return "Dexterity";
+    case "CON":
+      return "Constitution";
+    case "WIS":
+      return "Wisdom";
+    case "INT":
+      return "Intelligence";
+    case "CHA":
+      return "Charisma";
+  }
+};
+// TLA means Three Letter Acronym
+export const getAbilityTLA = (abilityName: AbilityName): Ability =>
+  abilityName.slice(0, 3).toUpperCase() as Ability;

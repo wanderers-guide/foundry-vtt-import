@@ -1,7 +1,11 @@
-import { Ability, AbilityName } from "../types/system";
-import { WGClassIdMap } from "../types/wanderers-guide-types";
+import {
+  Ability,
+  AbilityName,
+  ClassRecord,
+  ProficiencyLevel,
+} from "../types/system";
 
-export const classIdMap: WGClassIdMap = {
+export const classIdMap: ClassRecord = {
   265: "Alchemist",
   179: "Barbarian",
   269: "Bard",
@@ -48,6 +52,25 @@ export const getAbilityName = (ability: Ability): AbilityName => {
       return "Charisma";
   }
 };
+
+actor.name;
 // TLA means Three Letter Acronym
 export const getAbilityTLA = (abilityName: AbilityName): Ability =>
   abilityName.slice(0, 3).toUpperCase() as Ability;
+
+export const getFoundryProficiencyFromLevel = (
+  code: string | undefined
+): ProficiencyRank => {
+  switch (code) {
+    case "T":
+      return ProficiencyRank.TRAINED;
+    case "E":
+      return ProficiencyRank.EXPERT;
+    case "M":
+      return ProficiencyRank.MASTER;
+    case "L":
+      return ProficiencyRank.LEGENDARY;
+    default:
+      return ProficiencyRank.UNTRAINED;
+  }
+};

@@ -22,7 +22,7 @@ export type CRBClass =
   | "Swashbuckler"
   | "Witch"
   | "Wizard";
-export type WGClassIdMap = Record<number, Class>;
+export type ClassRecord = Record<number, Class>;
 // We don't need proficiencies for specific weapons and stuff because that shit is automatically handled by pf2e
 export type SpellType = "Occult" | "Primal" | "Divine" | "Arcane";
 export type SpellDC = `${SpellType}SpellDCs`;
@@ -38,7 +38,7 @@ export type DefenseType =
   | "Light_Armor"
   | "Medium_Armor"
   | "Heavy_Armor";
-export type Skill =
+export type CoreSkill =
   | "Acrobatics"
   | "Arcana"
   | "Athletics"
@@ -54,8 +54,26 @@ export type Skill =
   | "Society"
   | "Stealth"
   | "Survival"
-  | "Thievery"
-  | `${string}_LORE`;
+  | "Thievery";
+export type CoreSkillTLA =
+  | "ACR"
+  | "ARC"
+  | "ATH"
+  | "CRA"
+  | "DEC"
+  | "DIP"
+  | "ITM"
+  | "MED"
+  | "NAT"
+  | "OCC"
+  | "PRF"
+  | "REL"
+  | "SOC"
+  | "STE"
+  | "SUR"
+  | "THI";
+export type LoreSkill = `${string}_LORE`;
+export type Skill = CoreSkill | LoreSkill;
 export type Ability = "STR" | "DEX" | "CON" | "WIS" | "INT" | "CHA";
 export type AbilityName =
   | "Strength"
@@ -64,3 +82,10 @@ export type AbilityName =
   | "Wisdom"
   | "Intelligence"
   | "Charisma";
+export type Size =
+  | "Tiny"
+  | "Small"
+  | "Medium"
+  | "Large"
+  | "Huge"
+  | "Gargantuan";

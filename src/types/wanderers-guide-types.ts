@@ -1,11 +1,13 @@
 import { Exact } from "../utils/types";
 import {
   Ability,
+  AbilityName,
   AttackType,
   Class,
   DefenseType,
   ProficiencyLevel,
   SavingThrow,
+  Size,
   Skill,
   SpellDC,
   SpellLevel,
@@ -62,6 +64,7 @@ export type WGAncestry = {
   hitPoints: number;
   name: string;
   speed: number;
+  size: Uppercase<Size>;
 };
 
 export type WGBackground = {
@@ -73,6 +76,7 @@ export type WGClass = {
   name: Class;
   description: string;
   hitPoints: number;
+  keyAbility: AbilityName;
 };
 
 export type WGHeritage = {

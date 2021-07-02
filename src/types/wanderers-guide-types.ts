@@ -1,9 +1,75 @@
 import { Exact } from "../utils/types";
 
+type ScuffedBool = 0 | 1;
+
 export type WanderersGuideObject = {
   version: number;
   animalCompanions: [];
   build: WGBuild;
+  character: {};
+  spellBookSpells: [];
+  stats: {};
+};
+
+export type WGCharacter = Timestamped<{
+  level: number;
+  variantFreeArchetype: ScuffedBool;
+  variantAncestryParagon: ScuffedBool;
+  variantAutoBonusProgression: ScuffedBool;
+  variantGradualAbilityBoosts: ScuffedBool;
+  variantProfWithoutLevel: ScuffedBool;
+  variantStamina: ScuffedBool;
+  _ancestry: WGAncestry;
+  _background: WGBackground;
+  _class: WGClass;
+  _heritage: WGHeritage;
+}>;
+
+export type Class = CRBClass | GunsAndGearsClass | SecretsOfMagicClass;
+export type GunsAndGearsClass = "Gunslinger" | "Inventor";
+export type SecretsOfMagicClass = "Magus" | "Summoner";
+export type CRBClass =
+  | "Alchemist"
+  | "Barbarian"
+  | "Bard"
+  | "Champion"
+  | "Cleric"
+  | "Druid"
+  | "Fighter"
+  | "Gunslinger"
+  | "Inventor"
+  | "Investigator"
+  | "Monk"
+  | "Oracle"
+  | "Ranger"
+  | "Rogue"
+  | "Sorcerer"
+  | "Swashbuckler"
+  | "Witch"
+  | "Wizard";
+export type WGClassIdMap = Record<number, Class>;
+
+export type WGAncestry = {
+  description: string;
+  hitPoints: number;
+  name: string;
+  speed: number;
+};
+
+export type WGBackground = {
+  name: string;
+  description: string;
+};
+
+export type WGClass = {
+  name: string;
+  description: string;
+  hitPoints: number;
+};
+
+export type WGHeritage = {
+  name: string;
+  description: string;
 };
 
 export type WGBuild = {
@@ -12,7 +78,23 @@ export type WGBuild = {
   feats: WGFeat[];
   languages: WGLanguage[];
   proficiencies: WGProficiency[];
+  senses: WGSense[];
 };
+
+export type WGSense = Sourceable<
+  {
+    value: WGSenseMeta;
+  },
+  { source: "ancestry" }
+>;
+
+export type WGSenseMeta = Timestamped<{
+  id: number;
+  name: string;
+  description: string;
+  isVisionType: ScuffedBool;
+  visionPrecedence: number;
+}>;
 
 export type WGProficiency = Sourceable<
   Timestamped<{

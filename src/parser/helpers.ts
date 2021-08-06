@@ -1,8 +1,13 @@
+import { ProficiencyRank } from "../../types/character-data";
+import { ValidLanguage, ValidSense } from "../types/parser";
 import {
   Ability,
   AbilityName,
   ClassRecord,
+  CoreSkill,
+  CoreSkillTLA,
   ProficiencyLevel,
+  Skill,
 } from "../types/system";
 
 export const classIdMap: ClassRecord = {
@@ -58,8 +63,22 @@ actor.name;
 export const getAbilityTLA = (abilityName: AbilityName): Ability =>
   abilityName.slice(0, 3).toUpperCase() as Ability;
 
+export const getCoreSkillTLA = (
+  profName: CoreSkill | Uppercase<CoreSkill> | Lowercase<CoreSkill>
+): CoreSkillTLA => {
+  const upperProfName = profName.toUpperCase() as Uppercase<CoreSkill>;
+  switch (upperProfName) {
+    case "INTIMIDATION":
+      return "ITM";
+    case "PERFORMANCE":
+      return "PRF";
+    default:
+      return upperProfName.slice(0, 3) as CoreSkillTLA;
+  }
+};
+
 export const getFoundryProficiencyFromLevel = (
-  code: string | undefined
+  code: ProficiencyLevel | undefined
 ): ProficiencyRank => {
   switch (code) {
     case "T":
@@ -74,3 +93,126 @@ export const getFoundryProficiencyFromLevel = (
       return ProficiencyRank.UNTRAINED;
   }
 };
+
+export class UnsupportedVersionError extends Error {}
+
+export const baseSkills: CoreSkill[] = [
+  "Acrobatics",
+  "Arcana",
+  "Athletics",
+  "Crafting",
+  "Deception",
+  "Diplomacy",
+  "Intimidation",
+  "Medicine",
+  "Nature",
+  "Occultism",
+  "Performance",
+  "Religion",
+  "Society",
+  "Stealth",
+  "Survival",
+  "Thievery",
+];
+export const validSenses: ValidSense[] = [
+  "Darkvision",
+  "Echolocation",
+  "Greater Darkvision",
+  "Lifesense",
+  "Low-Light Vision",
+  "Motionsense",
+  "Scent",
+  "Tremorsense",
+  "Wavesense",
+];
+export const validLanguages: ValidLanguage[] = [
+  "Abyssal",
+  "Adlet",
+  "Aklo",
+  "Alghollthu",
+  "Amurrun",
+  "Anadi",
+  "Androffan",
+  "Anugobu",
+  "Aquan",
+  "Arboreal",
+  "Arcadian",
+  "Auran",
+  "Azlanti",
+  "Boggard",
+  "Calda",
+  "Caligni",
+  "Celestial",
+  "Common",
+  "Cyclops",
+  "D'ziriak",
+  "Daemonic",
+  "Druidic",
+  "Dwarven",
+  "Ekujae shape-script",
+  "Elven",
+  "Erutaki",
+  "Garundi",
+  "Giant",
+  "Girtablilu",
+  "Gnoll",
+  "Gnomish",
+  "Goblin",
+  "Goloma",
+  "Grioth",
+  "Grippli",
+  "Halfling",
+  "Hallit",
+  "Ignan",
+  "Infernal",
+  "Iruxi",
+  "Jistkan",
+  "Jotun",
+  "Jyoti",
+  "Kaava",
+  "Kelish",
+  "Kibwani",
+  "Kitsune",
+  "Kovintal",
+  "Lirgeni",
+  "Mi-Go",
+  "Minaten",
+  "Munavri",
+  "Mwangi",
+  "Mzunu",
+  "Nagaji",
+  "Necril",
+  "Ocotan",
+  "Orcish",
+  "Osiriani",
+  "Protean",
+  "Rasu",
+  "Requian",
+  "Samsaran",
+  "Sasquatch",
+  "Senzer",
+  "Shadowtongue",
+  "Shae",
+  "Shisk",
+  "Shoanti",
+  "Shoony",
+  "Skald",
+  "Sphinx",
+  "Strix",
+  "Sylvan",
+  "Taldane",
+  "Tengu",
+  "Terran",
+  "Thassilonian",
+  "Tien",
+  "Undercommon",
+  "Utopian",
+  "Vanara",
+  "Varisian",
+  "Varki",
+  "Vishkanyan",
+  "Wyrwood",
+  "Xanmba",
+  "Yithian",
+  "Ysoki",
+];

@@ -1,4 +1,4 @@
-interface CharacterPF2e {
+interface CharacterPF2e extends Actor {
   update(data: CharacterUpdateMap): Promise<CharacterPF2e | undefined>;
 }
 
@@ -54,7 +54,7 @@ type CharacterUpdateMap = {
   "data.skills.thi.rank"?: ProficiencyRank;
 };
 
-enum ProficiencyRank {
+export enum ProficiencyRank {
   UNTRAINED = 0,
   TRAINED = 1,
   EXPERT = 2,

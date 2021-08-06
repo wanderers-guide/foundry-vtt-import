@@ -4,6 +4,7 @@ import {
   AbilityName,
   AttackType,
   Class,
+  CoreSkill,
   DefenseType,
   ProficiencyLevel,
   SavingThrow,
@@ -11,6 +12,7 @@ import {
   Skill,
   SpellDC,
   SpellLevel,
+  SpellType,
 } from "./system";
 
 type ScuffedBool = 0 | 1;
@@ -22,6 +24,18 @@ export type WanderersGuideObject = {
   character: WGCharacter;
   spellBookSpells: WGSpell[];
   stats: WGStats;
+  profs: Record<
+    | CoreSkill
+    | AttackType
+    | DefenseType
+    | SpellDC
+    | SavingThrow
+    | `${SpellType}SpellAttacks`
+    | "Perception"
+    | "Class_DC"
+    | `${string} Lore`,
+    undefined | ProficiencyLevel
+  >;
 };
 
 type JsonString = string;
@@ -46,7 +60,10 @@ export type WGSpell = Timestamped<{
 }>;
 
 export type WGCharacter = Timestamped<{
+  name: string;
   level: number;
+  currentHealth?: number | null;
+  tempHealth?: number | null;
   variantFreeArchetype: ScuffedBool;
   variantAncestryParagon: ScuffedBool;
   variantAutoBonusProgression: ScuffedBool;
@@ -175,11 +192,12 @@ export type WGFeat = Sourceable<
   { source: "chosenFeats" }
 >;
 export type WGFeatMeta = Timestamped<{
-  canSelectMultiple: number;
+  canSelectMultiple: ScuffedBool;
   contentSrc: string;
   name: string;
-  description: string;
-  trigger: string;
+  description: string | null;
+  trigger: string | null;
+  level: number;
 }>;
 
 export type WGDomain = {};

@@ -95,6 +95,7 @@ export type ValidLanguage =
   | "Varisian"
   | "Varki"
   | "Vishkanyan"
+  | "Vudrani"
   | "Wyrwood"
   | "Xanmba"
   | "Yithian"

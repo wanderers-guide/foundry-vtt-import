@@ -36,7 +36,7 @@ describe("Parser", () => {
   });
 
   describe(toCharacter, () => {
-    it("correctly an object containing the correct info", () => {
+    it("correctly craft a curated object containing correct info", () => {
       const raz = parseWanderersGuideJSON(razlin.good);
       const haruno = parseWanderersGuideJSON(haruya.good);
       const parsedRazlin: ParsedCharacter = {
@@ -124,9 +124,9 @@ describe("Parser", () => {
         heritage: {
           name: "Observant Halfling",
         },
-        languages: ["Common", "Halfling"],
+        languages: expect.arrayContaining(["Common", "Halfling"]),
         senses: [],
-        feats: [
+        feats: expect.arrayContaining([
           {
             name: "Sure Feet",
             featLevel: 1,
@@ -242,12 +242,249 @@ describe("Parser", () => {
             featLevel: 1,
             levelAcquired: 10,
           },
-        ],
+        ]),
         spells: [],
+        usesFreeArchetype: true,
+      };
+      const parsedHaruya: ParsedCharacter = {
+        name: "Haruya Harutest",
+        level: 3,
+        class: "Witch",
+        classDC: 19,
+        hitpoints: {
+          current: 32,
+          temp: 0,
+          max: 32,
+        },
+        abilities: {
+          str: 10,
+          dex: 10,
+          con: 14,
+          int: 18,
+          wis: 12,
+          cha: 14,
+        },
+        proficiencies: {
+          classDC: ProficiencyRank.TRAINED,
+          perception: ProficiencyRank.TRAINED,
+          saves: {
+            fortitude: ProficiencyRank.TRAINED,
+            reflex: ProficiencyRank.TRAINED,
+            will: ProficiencyRank.EXPERT,
+          },
+          weapons: {
+            unarmed: ProficiencyRank.TRAINED,
+            simple: ProficiencyRank.TRAINED,
+            martial: ProficiencyRank.UNTRAINED,
+            advanced: ProficiencyRank.UNTRAINED,
+          },
+          armour: {
+            unarmored: ProficiencyRank.TRAINED,
+            light: ProficiencyRank.UNTRAINED,
+            medium: ProficiencyRank.UNTRAINED,
+            heavy: ProficiencyRank.UNTRAINED,
+          },
+          skills: {
+            acr: ProficiencyRank.UNTRAINED,
+            arc: ProficiencyRank.UNTRAINED,
+            ath: ProficiencyRank.UNTRAINED,
+            cra: ProficiencyRank.TRAINED,
+            dec: ProficiencyRank.TRAINED,
+            dip: ProficiencyRank.TRAINED,
+            itm: ProficiencyRank.TRAINED,
+            med: ProficiencyRank.MASTER,
+            nat: ProficiencyRank.EXPERT,
+            occ: ProficiencyRank.UNTRAINED,
+            prf: ProficiencyRank.UNTRAINED,
+            rel: ProficiencyRank.UNTRAINED,
+            soc: ProficiencyRank.TRAINED,
+            ste: ProficiencyRank.TRAINED,
+            sur: ProficiencyRank.TRAINED,
+            thi: ProficiencyRank.UNTRAINED,
+          },
+          lore: {
+            "Herbalism Lore": ProficiencyRank.TRAINED,
+          },
+          spells: {
+            arcane: {
+              dc: ProficiencyRank.UNTRAINED,
+              attacks: ProficiencyRank.UNTRAINED,
+            },
+            divine: {
+              dc: ProficiencyRank.UNTRAINED,
+              attacks: ProficiencyRank.UNTRAINED,
+            },
+            occult: {
+              dc: ProficiencyRank.UNTRAINED,
+              attacks: ProficiencyRank.UNTRAINED,
+            },
+            primal: {
+              dc: ProficiencyRank.TRAINED,
+              attacks: ProficiencyRank.TRAINED,
+            },
+          },
+        },
+        ancestry: {
+          name: "Human",
+          size: "medium",
+        },
+        heritage: {
+          name: "Versatile Human",
+        },
+        languages: expect.arrayContaining([
+          "Aklo",
+          "Aquan",
+          "Auran",
+          "Common",
+          "Ignan",
+          "Sylvan",
+          "Terran",
+          "Vudrani",
+        ]),
+        senses: [],
+        feats: expect.arrayContaining([
+          {
+            name: "Natural Ambition",
+            levelAcquired: 1,
+            featLevel: 1,
+          },
+          {
+            name: "Cauldron",
+            levelAcquired: 1,
+            featLevel: 1,
+          },
+          {
+            name: "Forager",
+            levelAcquired: 1,
+            featLevel: 1,
+          },
+          {
+            name: "Natural Medicine",
+            levelAcquired: 1,
+            featLevel: 1,
+          },
+          {
+            name: "Herbalist Dedication",
+            levelAcquired: 2,
+            featLevel: 2,
+          },
+          {
+            name: "Alchemical Crafting",
+            levelAcquired: 2,
+            featLevel: 1,
+          },
+          {
+            name: "Improvise Tool",
+            levelAcquired: 2,
+            featLevel: 1,
+          },
+          {
+            name: "Basic Lesson",
+            levelAcquired: 2,
+            featLevel: 2,
+          },
+          {
+            name: "Lesson of Life",
+            levelAcquired: 2,
+            featLevel: -1,
+          },
+          {
+            name: "Multilingual",
+            levelAcquired: 3,
+            featLevel: 1,
+          },
+        ]),
+        spells: expect.arrayContaining([
+          {
+            name: "Spirit Link",
+            level: 1,
+          },
+          {
+            name: "Acid Splash",
+            level: 0,
+          },
+          {
+            name: "Dancing Lights",
+            level: 0,
+          },
+          {
+            name: "Detect Magic",
+            level: 0,
+          },
+          {
+            name: "Guidance",
+            level: 0,
+          },
+          {
+            name: "Know Direction",
+            level: 0,
+          },
+          {
+            name: "Prestidigitation",
+            level: 0,
+          },
+          {
+            name: "Produce Flame",
+            level: 0,
+          },
+          {
+            name: "Sigil",
+            level: 0,
+          },
+          {
+            name: "Stabilize",
+            level: 0,
+          },
+          {
+            name: "Tanglefoot",
+            level: 0,
+          },
+          {
+            name: "Create Water",
+            level: 1,
+          },
+          {
+            name: "Fear",
+            level: 1,
+          },
+          {
+            name: "Feather Fall",
+            level: 1,
+          },
+          {
+            name: "Goblin Pox",
+            level: 1,
+          },
+          {
+            name: "Heal",
+            level: 1,
+          },
+          {
+            name: "Negate Aroma",
+            level: 1,
+          },
+          {
+            name: "Spider Sting",
+            level: 1,
+          },
+          {
+            name: "Summon Plant or Fungus",
+            level: 1,
+          },
+          {
+            name: "Vomit Swarm",
+            level: 2,
+          },
+          {
+            name: "Fungal Infestation",
+            level: 2,
+          },
+        ]),
         usesFreeArchetype: true,
       };
 
       expect(toCharacter(raz)).toEqual(parsedRazlin);
+      expect(toCharacter(haruno)).toEqual(parsedHaruya);
     });
   });
 });

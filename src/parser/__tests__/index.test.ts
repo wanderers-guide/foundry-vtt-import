@@ -339,7 +339,7 @@ describe("Parser", () => {
           "Ignan",
           "Sylvan",
           "Terran",
-          "Vudrani",
+          // "Vudrani",
         ]),
         senses: [],
         feats: expect.arrayContaining([

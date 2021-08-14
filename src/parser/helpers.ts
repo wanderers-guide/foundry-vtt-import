@@ -211,7 +211,7 @@ export const validLanguages: ValidLanguage[] = [
   "Varisian",
   "Varki",
   "Vishkanyan",
-  "Vudrani",
+  // "Vudrani",
   "Wyrwood",
   "Xanmba",
   "Yithian",

@@ -1,4 +1,5 @@
 import { CharacterPF2e } from "../types/character-data";
+import { convertCharacterToActor } from "./converter";
 import { parseWanderersGuideJSON, toCharacter } from "./parser";
 import { UnsupportedVersionError } from "./parser/helpers";
 
@@ -87,13 +88,17 @@ function handleImport(
   const fileText = fileReader.readAsText(charFile);
 }
 
-function parseFile(event: ProgressEvent<FileReader>, actor: CharacterPF2e) {
+async function parseFile(
+  event: ProgressEvent<FileReader>,
+  actor: CharacterPF2e
+) {
   try {
     const parsedFile = parseWanderersGuideJSON(`${event.target?.result}`);
     const characterData = toCharacter(parsedFile);
 
     // 1. Update actor class
-    // 2. Update actor stats / text fields / level
+    // 2. Update actor stats / text fields / level / skills
+    await convertCharacterToActor(actor, characterData);
     // 3. Update actor feats (skipping duplicates added by class)
     // 4. Create spell list?
     // 5. Import spells?

@@ -1,4 +1,4 @@
-import { ProficiencyRank } from "../../types/character-data";
+import { ProficiencyRank } from "../../../types/character-data";
 import { ValidLanguage, ValidSense } from "../types/parser";
 import {
   Ability,
@@ -7,7 +7,6 @@ import {
   CoreSkill,
   CoreSkillTLA,
   ProficiencyLevel,
-  Skill,
 } from "../types/system";
 
 export const classIdMap: ClassRecord = {

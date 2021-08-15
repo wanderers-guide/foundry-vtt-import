@@ -1,12 +1,6 @@
-import { ProficiencyRank } from "../../types/character-data";
+import { ProficiencyRank } from "../../../types/character-data";
 import { ParsedCharacter, ValidLanguage, ValidSense } from "../types/parser";
-import {
-  Ability,
-  AbilityName,
-  CoreSkill,
-  CoreSkillTLA,
-  Size,
-} from "../types/system";
+import { Ability, AbilityName, CoreSkillTLA, Size } from "../types/system";
 import { WanderersGuideObject } from "../types/wanderers-guide-types";
 import {
   baseSkills,

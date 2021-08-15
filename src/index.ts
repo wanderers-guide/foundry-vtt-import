@@ -30,7 +30,7 @@ Hooks.on(
       renderDialogue(actor);
     });
 
-    title.insertAfter(openImportDialogButton);
+    openImportDialogButton.insertAfter(title);
   }
 );
 

@@ -1,6 +1,6 @@
 import { parseWanderersGuideJSON, toCharacter } from "..";
-import { importGuidechar } from "../../../../testUtils";
-import { ProficiencyRank } from "../../../../types/character-data";
+import { importGuidechar } from "../../../testUtils";
+import { ProficiencyRank } from "../../../types/character-data";
 import { ParsedCharacter } from "../../types/parser";
 import { UnsupportedVersionError } from "../helpers";
 

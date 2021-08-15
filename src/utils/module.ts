@@ -71,7 +71,7 @@ export async function getCompendiumDocument(pack: string, id: string) {
 }
 
 export async function getPF2ECompendiumDocuments(
-  pack: "classes" | "classfeatures"
+  pack: "classes" | "classfeatures" | "ancestries"
 ) {
   return getCompendiumDocuments(`pf2e.${pack}`);
 }

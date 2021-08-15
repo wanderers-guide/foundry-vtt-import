@@ -4,6 +4,7 @@ import { parseWanderersGuideJSON, toCharacter } from "./parser";
 import { UnsupportedVersionError } from "./parser/helpers";
 import { debugLog, registerSetting } from "./utils/module";
 import { addClass, addClassFeatures } from "./converter/class";
+import { addAncestry, addAncestryFeatures } from "./converter/ancestry";
 
 Hooks.on("ready", () => {
   registerSetting("debug", {
@@ -128,15 +129,18 @@ async function parseFile(
     const parsedFile = parseWanderersGuideJSON(`${event.target?.result}`);
     const characterData = toCharacter(parsedFile);
 
-    // 1. Update actor class
+    // 1. Update the ABCs (Ancestry, Background, Class)
+    await addAncestry(actor, characterData);
     await addClass(actor, characterData);
-    // 2. Update actor stats / text fields / level / skills
-    await setAbilitiesAndProficiencies(actor, characterData);
-    // 3. Update actor feats (skipping duplicates added by class)
+    // 2. Add ABC Features!
+    await addAncestryFeatures(actor, characterData);
     await addClassFeatures(actor, characterData);
-    // 4. Create spell list?
-    // 5. Import spells?
-    // 6. Import equipment?
+    // 3. Update actor stats / text fields / level / skills
+    await setAbilitiesAndProficiencies(actor, characterData);
+    // 5. Update actor feats (skipping duplicates added by class)
+    // 6. Create spell list?
+    // 7. Import spells?
+    // 8. Import equipment?
   } catch (error) {
     if (error instanceof UnsupportedVersionError) {
       ui.notifications?.error(error.message);

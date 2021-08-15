@@ -9,7 +9,7 @@
         "pf2e"
     ],
     "scripts": [
-        "build/module.min.js"
+        "dist/module.js"
     ],
     "version": "0.0.2",
     "url": "https://github.com/bLittle1996/foundry-vtt-wanderers-guide-character-import",

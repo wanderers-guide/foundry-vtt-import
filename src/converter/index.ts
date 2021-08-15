@@ -1,4 +1,4 @@
-import { CharacterPF2e, CharacterUpdateMap } from "../../types/character-data";
+import { CharacterPF2e, CharacterUpdateMap } from "../types/character-data";
 import { ParsedCharacter } from "../types/parser";
 
 export const updateActor = (

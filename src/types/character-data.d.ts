@@ -1,3 +1,5 @@
+import { ProficiencyRank } from "./parser";
+
 interface CharacterPF2e extends Actor {
   update(data: CharacterUpdateMap): Promise<CharacterPF2e | undefined>;
 }
@@ -54,14 +56,6 @@ type CharacterUpdateMap = {
   "data.skills.sur.rank"?: ProficiencyRank;
   "data.skills.thi.rank"?: ProficiencyRank;
 };
-
-export enum ProficiencyRank {
-  UNTRAINED = 0,
-  TRAINED = 1,
-  EXPERT = 2,
-  MASTER = 3,
-  LEGENDARY = 4,
-}
 
 type CharacterSense = {
   exceptions: string;

@@ -1,4 +1,3 @@
-import { ProficiencyRank } from "../../types/character-data";
 import {
   Ability,
   Class,
@@ -8,6 +7,14 @@ import {
   SpellLevel,
   SpellType,
 } from "./system";
+
+export enum ProficiencyRank {
+  UNTRAINED = 0,
+  TRAINED = 1,
+  EXPERT = 2,
+  MASTER = 3,
+  LEGENDARY = 4,
+}
 
 export type ValidLanguage =
   | "Abyssal"

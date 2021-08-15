@@ -1,5 +1,4 @@
-import { ProficiencyRank } from "../../types/character-data";
-import { ValidLanguage, ValidSense } from "../types/parser";
+import { ProficiencyRank, ValidLanguage, ValidSense } from "../types/parser";
 import {
   Ability,
   AbilityName,

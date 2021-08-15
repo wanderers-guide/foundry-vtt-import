@@ -1,4 +1,4 @@
-import { CharacterPF2e } from "../types/character-data";
+import { CharacterPF2e } from "./types/character-data";
 import { convertCharacterToActor } from "./converter";
 import { parseWanderersGuideJSON, toCharacter } from "./parser";
 import { UnsupportedVersionError } from "./parser/helpers";

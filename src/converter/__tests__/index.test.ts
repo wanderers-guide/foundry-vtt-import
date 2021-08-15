@@ -1,9 +1,6 @@
 import { toCharacterUpdateMap, updateActor } from "..";
 import { importGuidechar } from "../../../testUtils";
-import {
-  CharacterPF2e,
-  CharacterUpdateMap,
-} from "../../../types/character-data";
+import { CharacterPF2e, CharacterUpdateMap } from "../../types/character-data";
 import { parseWanderersGuideJSON, toCharacter } from "../../parser";
 
 describe(updateActor, () => {

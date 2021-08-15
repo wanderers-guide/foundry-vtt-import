@@ -77,7 +77,7 @@ export const addLoreSkills = async (
   const foundryLoreSkills = Object.entries(data.proficiencies.lore).map(
     ([name, rank]) => {
       return {
-        name: name.replace(/abcedf/, ""),
+        name: name.replace(/\blore\b/gi, ""),
         type: "lore",
         data: {
           proficient: {

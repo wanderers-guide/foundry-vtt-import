@@ -4,7 +4,8 @@ interface CharacterPF2e extends Actor {
 
 type CharacterUpdateMap = {
   name?: string;
-  "data.details.level.value"?: string;
+  "token.name"?: string;
+  "data.details.level.value"?: string | number;
   "data.details.heritage.value"?: string;
   "data.details.age.value"?: string;
   "data.details.gender.value"?: string;
@@ -19,11 +20,11 @@ type CharacterUpdateMap = {
   "data.abilities.int.value"?: number;
   "data.abilities.cha.value"?: number;
   "data.attributes.ancestryhp"?: number;
-  "data.attributes.classDC"?: number;
   "data.attributes.classhp"?: number;
   "data.attributes.speed.value"?: number;
   "data.attributes.flatbonushp"?: number;
   "data.attributes.hp.value"?: number;
+  "data.attributes.classDC.rank"?: number;
   "data.attributes.perception.rank"?: ProficiencyRank;
   "data.saves.fortitude.rank"?: ProficiencyRank;
   "data.saves.reflex.rank"?: ProficiencyRank;

@@ -3,11 +3,10 @@ import { convertCharacterToActor } from "./converter";
 import { parseWanderersGuideJSON, toCharacter } from "./parser";
 import { UnsupportedVersionError } from "./parser/helpers";
 
+const moduleKey = "wanderers-guide-character-importer";
+
 function debugLog(...stuff: unknown[]) {
-  const isDebugEnabled = (game as Game).settings.get(
-    "wanderers-guide-character-importer",
-    "debug"
-  );
+  const isDebugEnabled = (game as Game).settings.get(moduleKey, "debug");
   if (isDebugEnabled) {
     console.log(
       "%cWanderer's Guide Character Importer Debug:",
@@ -18,21 +17,14 @@ function debugLog(...stuff: unknown[]) {
 }
 
 Hooks.on("ready", () => {
-  (game as Game).settings.register(
-    "wanderers-guide-character-importer",
-    "debug",
-    {
-      name: "Debug Mode",
-      hint: "Enable debug logging to the browser console.",
-      scope: "client",
-      config: true,
-      default: false,
-      type: Boolean,
-      onChange: (isEnabled) => {
-        isDebugEnabled = isEnabled as boolean;
-      },
-    }
-  );
+  (game as Game).settings.register(moduleKey, "debug", {
+    name: "Debug Mode",
+    hint: "Enable debug logging to the browser console.",
+    scope: "client",
+    config: true,
+    default: false,
+    type: Boolean,
+  });
 });
 
 Hooks.on(

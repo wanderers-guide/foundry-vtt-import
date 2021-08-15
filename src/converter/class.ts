@@ -90,6 +90,7 @@ export const addClassFeatures = async (
     featDocuments = [...featDocuments, compendiumFeat.data];
   }
 
+  debugLog("addClassFeatures() Adding class features", { featDocuments });
   const addedFeats = await actor.createEmbeddedDocuments(
     "Item",
     featDocuments as Record<string, any>[]

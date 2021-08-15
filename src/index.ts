@@ -5,6 +5,7 @@ import { UnsupportedVersionError } from "./parser/helpers";
 import { debugLog, registerSetting } from "./utils/module";
 import { addClass, addClassFeatures } from "./converter/class";
 import { addAncestry, addAncestryFeatures } from "./converter/ancestry";
+import { addBackground, addBackgroundFeatures } from "./converter/background";
 
 Hooks.on("ready", () => {
   registerSetting("debug", {
@@ -131,9 +132,11 @@ async function parseFile(
 
     // 1. Update the ABCs (Ancestry, Background, Class)
     await addAncestry(actor, characterData);
+    await addBackground(actor, characterData);
     await addClass(actor, characterData);
     // 2. Add ABC Features!
     await addAncestryFeatures(actor, characterData);
+    await addBackgroundFeatures(actor, characterData);
     await addClassFeatures(actor, characterData);
     // 3. Update actor stats / text fields / level / skills
     await setAbilitiesAndProficiencies(actor, characterData);

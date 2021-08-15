@@ -1,5 +1,7 @@
 import { CharacterPF2e, CharacterUpdateMap } from "../types/character-data";
 import { ParsedCharacter } from "../types/parser";
+import { debugLog, getGame } from "../utils/module";
+import { addLoreSkills } from "./skills";
 
 export const updateActor = (
   actor: CharacterPF2e,
@@ -10,16 +12,16 @@ export const updateActor = (
     .then((updatedActor) => [updatedActor || actor, !!updatedActor]);
 };
 
-export const convertCharacterToActor = async (
+export const setAbilitiesAndProficiencies = async (
   actor: CharacterPF2e,
   data: ParsedCharacter
 ) => {
   const updateMap = toCharacterUpdateMap(data);
-
+  debugLog("setAbilitiesAndProficiencies() updating actor", { updateMap });
   const [, hadChanges] = await updateActor(actor, updateMap);
   const changedOrUpdatedDocuments = await addLoreSkills(actor, data);
 
-  return hadChanges || changedOrUpdatedDocuments;
+  return hadChanges || !!changedOrUpdatedDocuments.length;
 };
 
 export const toCharacterUpdateMap = (
@@ -68,52 +70,4 @@ export const toCharacterUpdateMap = (
     "data.attributes.perception.rank": data.proficiencies.perception,
     "data.attributes.classDC.rank": data.proficiencies.classDC,
   };
-};
-
-export const addLoreSkills = async (
-  actor: CharacterPF2e,
-  data: ParsedCharacter
-) => {
-  const foundryLoreSkills = Object.entries(data.proficiencies.lore).map(
-    ([name, rank]) => {
-      return {
-        name: name.replace(/\blore\b/gi, ""),
-        type: "lore",
-        data: {
-          proficient: {
-            value: rank,
-          },
-          featType: "",
-          mod: {
-            value: 0,
-          },
-          item: {
-            value: 0,
-          },
-        },
-      };
-    }
-  );
-
-  const hasPreExistingLoreSkill = (loreSkill: typeof foundryLoreSkills[0]) =>
-    actor.data.items.some(
-      (item) => item.data.name === loreSkill.name && item.type === "lore"
-    );
-
-  const skillsToCreate = foundryLoreSkills.filter(
-    (loreSkill) => !hasPreExistingLoreSkill(loreSkill)
-  );
-
-  const skillsToUpdate = foundryLoreSkills.filter(hasPreExistingLoreSkill);
-
-  const createdLoreSkills = await actor.createEmbeddedDocuments(
-    "Item",
-    skillsToCreate
-  );
-  const updatedLoreSkills = await actor.updateEmbeddedDocuments(
-    "Item",
-    skillsToUpdate
-  );
-
-  return [...createdLoreSkills, ...updatedLoreSkills];
 };

@@ -1,23 +1,11 @@
 import { CharacterPF2e } from "./types/character-data";
-import { convertCharacterToActor } from "./converter";
+import { setAbilitiesAndProficiencies } from "./converter/core";
 import { parseWanderersGuideJSON, toCharacter } from "./parser";
 import { UnsupportedVersionError } from "./parser/helpers";
-
-const moduleKey = "wanderers-guide-character-importer";
-
-function debugLog(...stuff: unknown[]) {
-  const isDebugEnabled = (game as Game).settings.get(moduleKey, "debug");
-  if (isDebugEnabled) {
-    console.log(
-      "%cWanderer's Guide Character Importer Debug:",
-      "color: white; font-weight: bold; background: green; padding: 2px; border-radius: 2px;",
-      ...stuff
-    );
-  }
-}
+import { debugLog, registerSetting } from "./utils/module";
 
 Hooks.on("ready", () => {
-  (game as Game).settings.register(moduleKey, "debug", {
+  registerSetting("debug", {
     name: "Debug Mode",
     hint: "Enable debug logging to the browser console.",
     scope: "client",
@@ -141,7 +129,7 @@ async function parseFile(
 
     // 1. Update actor class
     // 2. Update actor stats / text fields / level / skills
-    await convertCharacterToActor(actor, characterData);
+    await setAbilitiesAndProficiencies(actor, characterData);
     // 3. Update actor feats (skipping duplicates added by class)
     // 4. Create spell list?
     // 5. Import spells?

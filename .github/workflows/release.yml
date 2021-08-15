@@ -48,3 +48,11 @@ jobs:
           artifacts: "./module.json, ./module.zip"
           tag: ${{ github.event.release.tag_name }}
           body: ${{ github.event.release.body }}
+
+      - name: Commit module.json changes
+        uses: EndBug/add-and-commit@v7
+        with:
+          author_name: Release Action
+          author_email: b.little1996@gmail.com
+          message: "Updated module.json to reflect release!"
+          add: "module.json"

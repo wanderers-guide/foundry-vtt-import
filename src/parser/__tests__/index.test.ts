@@ -120,6 +120,7 @@ describe("Parser", () => {
           name: "Halfling",
           size: "small",
         },
+        background: "Entertainer",
         heritage: {
           name: "Observant Halfling",
         },
@@ -327,6 +328,7 @@ describe("Parser", () => {
           name: "Human",
           size: "medium",
         },
+        background: "Herbalist",
         heritage: {
           name: "Versatile Human",
         },

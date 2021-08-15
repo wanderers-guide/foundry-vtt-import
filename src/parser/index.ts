@@ -56,6 +56,7 @@ export const toCharacter = (wgData: WanderersGuideObject): ParsedCharacter => {
       name: wgData.character._ancestry.name,
       size: wgData.character._ancestry.size.toLowerCase() as Lowercase<Size>,
     },
+    background: wgData.character._background.name,
     heritage: {
       name: wgData.character._heritage.name,
     },

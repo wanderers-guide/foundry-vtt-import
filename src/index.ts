@@ -53,10 +53,10 @@ Hooks.on(
     openImportDialogButton.on("click", () => {
       renderDialogue(actor);
     });
-    debugLog("renderActorSheet handler: inserting button into title", {
-      title,
-      openImportDialogButton,
-    });
+    // debugLog("renderActorSheet handler: inserting button into title", {
+    //   title,
+    //   openImportDialogButton,
+    // });
     openImportDialogButton.insertAfter(title);
   }
 );

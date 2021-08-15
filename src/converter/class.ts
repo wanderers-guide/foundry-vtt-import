@@ -87,7 +87,7 @@ export const addClassFeatures = async (
       debugLog("addClassFeatures() Unable to find compendium feat", { feat });
       continue;
     }
-    featDocuments = [...featDocuments, ...compendiumFeat.data];
+    featDocuments = [...featDocuments, compendiumFeat.data];
   }
 
   const addedFeats = await actor.createEmbeddedDocuments(

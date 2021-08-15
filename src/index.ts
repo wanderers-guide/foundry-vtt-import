@@ -85,7 +85,7 @@ function handleImport(
 
   const fileReader = new FileReader();
   fileReader.onload = (e) => parseFile(e, actor);
-  const fileText = fileReader.readAsText(charFile);
+  fileReader.readAsText(charFile);
 }
 
 async function parseFile(

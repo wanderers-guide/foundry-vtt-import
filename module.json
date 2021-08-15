@@ -8,6 +8,9 @@
     "system": [
         "pf2e"
     ],
+    "scripts": [
+        "build/module.min.js"
+    ],
     "version": "0.0.1",
     "url": "https://github.com/bLittle1996/foundry-vtt-wanderers-guide-character-import",
     "manifest": "https://raw.githubusercontent.com/bLittle1996/foundry-vtt-wanderers-guide-character-import/main/module.json",

@@ -3,6 +3,7 @@ import { setAbilitiesAndProficiencies } from "./converter/core";
 import { parseWanderersGuideJSON, toCharacter } from "./parser";
 import { UnsupportedVersionError } from "./parser/helpers";
 import { debugLog, registerSetting } from "./utils/module";
+import { addClass, addClassFeatures } from "./converter/class";
 
 Hooks.on("ready", () => {
   registerSetting("debug", {
@@ -128,9 +129,11 @@ async function parseFile(
     const characterData = toCharacter(parsedFile);
 
     // 1. Update actor class
+    await addClass(actor, characterData);
     // 2. Update actor stats / text fields / level / skills
     await setAbilitiesAndProficiencies(actor, characterData);
     // 3. Update actor feats (skipping duplicates added by class)
+    await addClassFeatures(actor, characterData);
     // 4. Create spell list?
     // 5. Import spells?
     // 6. Import equipment?

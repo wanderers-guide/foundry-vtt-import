@@ -113,7 +113,7 @@ function renderDialogue(actor: CharacterPF2e) {
       },
     },
     default: "close",
-  });
+  }).render(true);
 }
 
 function handleImport(

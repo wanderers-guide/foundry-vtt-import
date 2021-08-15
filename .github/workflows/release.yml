@@ -33,7 +33,7 @@ jobs:
       # Create a zip file with all files required by the module to add to the release
       - run: npm ci
       - run: npm run build
-      - run: zip -r ./module.zip module.json LICENSE build/module.min.js
+      - run: zip -r ./module.zip module.json LICENSE build/module.js
 
       # Create a release for this specific version
       - name: Update Release with Files

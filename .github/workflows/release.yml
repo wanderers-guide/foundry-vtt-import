@@ -54,6 +54,6 @@ jobs:
         with:
           author_name: Release Action
           author_email: b.little1996@gmail.com
-          message: "Updated module.json to reflect release!"
+          message: "[${{ steps.get_version.outputs.version-without-v }}] Updated module.json to reflect release!"
           add: "module.json"
           branch: ${{ github.event.release.target_commitish }}

@@ -3,9 +3,40 @@ import { convertCharacterToActor } from "./converter";
 import { parseWanderersGuideJSON, toCharacter } from "./parser";
 import { UnsupportedVersionError } from "./parser/helpers";
 
+let isDebugEnabled = false;
+
+function debugLog(...stuff: unknown[]) {
+  if (isDebugEnabled) {
+    console.log(
+      "%cWanderer's Guide Character Importer Debug:",
+      "color: white; font-weight: bold; background: green; padding: 2px; border-radius: 2px;",
+      ...stuff
+    );
+  }
+}
+
+Hooks.on("ready", () => {
+  (game as Game).settings.register(
+    "wanderers-guide-character-importer",
+    "debug",
+    {
+      name: "Debug Mode",
+      hint: "Enable debug logging to the browser console.",
+      scope: "client",
+      config: true,
+      default: false,
+      type: Boolean,
+      onChange: (isEnabled) => {
+        isDebugEnabled = isEnabled as boolean;
+      },
+    }
+  );
+});
+
 Hooks.on(
   "renderActorSheet",
   (sheet: ActorSheet, elSheet: JQuery<HTMLDivElement>) => {
+    debugLog("Begin renderActorSheet handler");
     const { user } = game as Game;
     const { actor } = sheet;
 
@@ -14,12 +45,22 @@ Hooks.on(
       !user ||
       !actor.canUserModify(user, "update")
     ) {
+      debugLog(
+        "renderActorSheet handler: aborted because of either no user, incorrect sheet type, or insufficient permissions",
+        {
+          type: actor.data.type,
+          user,
+          canModify: user && actor.canUserModify(user, "update"),
+        }
+      );
+
       return;
     }
 
     const title = elSheet.find("header.window-header h4.window-title");
 
     if (!title) {
+      debugLog("renderActorSheet handler: no title element found", { title });
       return;
     }
 
@@ -29,12 +70,16 @@ Hooks.on(
     openImportDialogButton.on("click", () => {
       renderDialogue(actor);
     });
-
+    debugLog("renderActorSheet handler: inserting button into title", {
+      title,
+      openImportDialogButton,
+    });
     openImportDialogButton.insertAfter(title);
   }
 );
 
 function renderDialogue(actor: CharacterPF2e) {
+  debugLog("Begin renderDialogue");
   new Dialog({
     title: "Import Wanderer's Guide Character",
     content: `
@@ -75,6 +120,7 @@ function handleImport(
   elDialog: HTMLElement | JQuery<HTMLElement>,
   actor: CharacterPF2e
 ) {
+  debugLog("Begin handleImport");
   const el = $(elDialog);
 
   const fileInput = el.find("#char-file-import").get(0) as HTMLInputElement;
@@ -94,6 +140,7 @@ async function parseFile(
   event: ProgressEvent<FileReader>,
   actor: CharacterPF2e
 ) {
+  debugLog("Begin parseFile");
   try {
     const parsedFile = parseWanderersGuideJSON(`${event.target?.result}`);
     const characterData = toCharacter(parsedFile);

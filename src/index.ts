@@ -29,6 +29,8 @@ Hooks.on(
     openImportDialogButton.on("click", () => {
       renderDialogue(actor);
     });
+
+    title.insertAfter(openImportDialogButton);
   }
 );
 

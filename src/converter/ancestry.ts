@@ -27,7 +27,7 @@ export const addAncestry = async (
   }
 
   const ancestryToAdd = ancestryCompendium.find(
-    (c) => c.name?.toLowerCase() === data.ancestry.name
+    (c) => c.name?.toLowerCase() === data.ancestry.name.toLowerCase()
   ) as Item;
 
   if (!ancestryToAdd) {

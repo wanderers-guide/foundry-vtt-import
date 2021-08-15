@@ -56,7 +56,6 @@ export const getAbilityName = (ability: Ability): AbilityName => {
   }
 };
 
-actor.name;
 // TLA means Three Letter Acronym
 export const getAbilityTLA = (abilityName: AbilityName): Ability =>
   abilityName.slice(0, 3).toUpperCase() as Ability;

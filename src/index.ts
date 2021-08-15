@@ -3,9 +3,11 @@ import { convertCharacterToActor } from "./converter";
 import { parseWanderersGuideJSON, toCharacter } from "./parser";
 import { UnsupportedVersionError } from "./parser/helpers";
 
-let isDebugEnabled = false;
-
 function debugLog(...stuff: unknown[]) {
+  const isDebugEnabled = (game as Game).settings.get(
+    "wanderers-guide-character-importer",
+    "debug"
+  );
   if (isDebugEnabled) {
     console.log(
       "%cWanderer's Guide Character Importer Debug:",

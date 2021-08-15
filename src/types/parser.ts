@@ -128,6 +128,7 @@ export type ParsedCharacter = {
     name: string;
     size: Lowercase<Size>;
   };
+  background: string;
   heritage: {
     name: string;
   };

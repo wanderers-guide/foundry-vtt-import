@@ -13,6 +13,10 @@ jobs:
         with:
           node-version: 14
 
+      - name: Extract branch name
+        id: extract_branch
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+
       # get part of the tag after the `v`
       - name: Extract tag version number
         id: get_version
@@ -56,3 +60,4 @@ jobs:
           author_email: b.little1996@gmail.com
           message: "Updated module.json to reflect release!"
           add: "module.json"
+          branch: ${{ steps.extract_branch.outputs.branch }}

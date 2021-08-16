@@ -121,6 +121,8 @@ function handleImport(
   const charFile = (fileInput.files ?? [])[0];
   const purgeFeatCheckbox = el.find("#feat-purge").get(0) as HTMLInputElement;
 
+  debugLog({ purgeFeatCheckbox });
+
   if (!charFile) {
     ui.notifications?.error("Unable to find uploaded .guidechar file!");
     return;
@@ -152,14 +154,18 @@ async function parseFile(
     }
 
     // 1. Update the ABCs (Ancestry, Background, Class)
-    await addAncestry(actor, characterData);
-    await addBackground(actor, characterData);
-    await addClass(actor, characterData);
+    await Promise.all([
+      addAncestry(actor, characterData),
+      addBackground(actor, characterData),
+      addClass(actor, characterData),
+    ]);
     // 2. Add ABC Features!
-    await addAncestryFeatures(actor, characterData);
-    await addBackgroundFeatures(actor, characterData);
-    await addClassFeatures(actor, characterData);
-    await addHeritageFeat(actor, characterData);
+    await Promise.all([
+      addAncestryFeatures(actor, characterData),
+      addBackgroundFeatures(actor, characterData),
+      addClassFeatures(actor, characterData),
+      addHeritageFeat(actor, characterData),
+    ]);
     // 3. Update actor stats / text fields / level / skills
     await setAbilitiesAndProficiencies(actor, characterData);
     // 5. Update actor feats (skipping duplicates added by class)

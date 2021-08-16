@@ -15,7 +15,8 @@ export const addFeats = async (actor: CharacterPF2e, data: ParsedCharacter) => {
   for (const feat of data.feats) {
     const compendiumFeat = compendiumFeats.find(
       (item) =>
-        item.name === getFoundryFeatName(feat.name, actorClassName as Class)
+        item.name?.toLowerCase() ===
+        getFoundryFeatName(feat.name, actorClassName as Class).toLowerCase()
     );
 
     if (!compendiumFeat) {

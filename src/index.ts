@@ -26,7 +26,7 @@ Hooks.on("ready", () => {
 Hooks.on(
   "renderActorSheet",
   (sheet: ActorSheet, elSheet: JQuery<HTMLDivElement>) => {
-    debugLog("Begin renderActorSheet handler");
+    // debugLog("Begin renderActorSheet handler");
     const { user } = game as Game;
     const { actor } = sheet;
 
@@ -58,7 +58,7 @@ Hooks.on(
       '<button><i class="fas fa-file-import">Import from Wanderer\'s Guide</button>'
     );
     openImportDialogButton.on("click", () => {
-      renderDialogue(actor);
+      renderDialogue(actor as CharacterPF2e);
     });
     // debugLog("renderActorSheet handler: inserting button into title", {
     //   title,
@@ -133,17 +133,24 @@ function handleImport(
     });
   fileReader.readAsText(charFile);
 }
+type ParseFileOptions = {
+  purgeFeats?: boolean;
+};
 
 async function parseFile(
   event: ProgressEvent<FileReader>,
-  actor: CharacterPF2e
+  actor: CharacterPF2e,
+  options: ParseFileOptions
 ) {
   debugLog("Begin parseFile");
   try {
     const parsedFile = parseWanderersGuideJSON(`${event.target?.result}`);
     const characterData = toCharacter(parsedFile);
 
-    await purgeFeatsAndFeatures(actor);
+    if (options.purgeFeats) {
+      await purgeFeatsAndFeatures(actor);
+    }
+
     // 1. Update the ABCs (Ancestry, Background, Class)
     await addAncestry(actor, characterData);
     await addBackground(actor, characterData);

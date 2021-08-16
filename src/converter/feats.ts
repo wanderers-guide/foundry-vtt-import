@@ -6,11 +6,7 @@ import { debugLog, getPF2ECompendiumDocuments } from "../utils/module";
 
 export const getFoundryFeatName = (n: string, className: Class): string => n;
 
-export const addFeats = async (
-  actor: CharacterPF2e,
-  data: ParsedCharacter,
-  skipDuplicates = true
-) => {
+export const addFeats = async (actor: CharacterPF2e, data: ParsedCharacter) => {
   const actorClassName = actor.class.name;
   const compendiumFeats = await getPF2ECompendiumDocuments("feats-srd");
   const actorFeats: Item[] = actor.data.items.filter((i) => i.type === "feat");
@@ -47,4 +43,10 @@ export const addFeats = async (
   return createdFeats;
 };
 
-export const addFeat = (actor: CharacterPF2e, feat: any) => {};
+export const purgeFeatsAndFeatures = (actor: CharacterPF2e) => {
+  debugLog("purgeFeatsAndFeatures() Removing all feats!");
+  return actor.deleteEmbeddedDocuments(
+    "Item",
+    actor.data.items.filter((i) => i.type === "feat").map((f) => f.id as string)
+  );
+};

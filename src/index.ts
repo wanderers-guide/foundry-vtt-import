@@ -10,7 +10,7 @@ import {
   addHeritageFeat,
 } from "./converter/ancestry";
 import { addBackground, addBackgroundFeatures } from "./converter/background";
-import { addFeats } from "./converter/feats";
+import { addFeats, purgeFeatsAndFeatures } from "./converter/feats";
 
 Hooks.on("ready", () => {
   registerSetting("debug", {
@@ -87,6 +87,10 @@ function renderDialogue(actor: CharacterPF2e) {
                 <li>Select the file you just downloaded in the input below and click "Import Character"!</li>
             </ol>
             <div class="form-group">
+                <label for="feat-purge">Delete existing feats?</label>
+                <input id="feat-purge" type="checkbox" checked>
+            </div>
+            <div class="form-group">
                 <label for="char-file-import">Import .guidechar file</label>
                 <input id="char-file-import" type="file" accept=".guidechar">
             </div>
@@ -115,6 +119,7 @@ function handleImport(
 
   const fileInput = el.find("#char-file-import").get(0) as HTMLInputElement;
   const charFile = (fileInput.files ?? [])[0];
+  const purgeFeatCheckbox = el.find("#feat-purge").get(0) as HTMLInputElement;
 
   if (!charFile) {
     ui.notifications?.error("Unable to find uploaded .guidechar file!");
@@ -122,7 +127,10 @@ function handleImport(
   }
 
   const fileReader = new FileReader();
-  fileReader.onload = (e) => parseFile(e, actor);
+  fileReader.onload = (e) =>
+    parseFile(e, actor, {
+      purgeFeats: purgeFeatCheckbox.checked,
+    });
   fileReader.readAsText(charFile);
 }
 
@@ -135,6 +143,7 @@ async function parseFile(
     const parsedFile = parseWanderersGuideJSON(`${event.target?.result}`);
     const characterData = toCharacter(parsedFile);
 
+    await purgeFeatsAndFeatures(actor);
     // 1. Update the ABCs (Ancestry, Background, Class)
     await addAncestry(actor, characterData);
     await addBackground(actor, characterData);

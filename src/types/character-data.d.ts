@@ -1,6 +1,7 @@
 import { ProficiencyRank } from "./parser";
 
 interface CharacterPF2e extends Actor {
+  class: Item;
   update(data: CharacterUpdateMap): Promise<CharacterPF2e | undefined>;
 }
 

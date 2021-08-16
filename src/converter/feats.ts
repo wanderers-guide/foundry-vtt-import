@@ -46,8 +46,17 @@ export const addFeats = async (actor: CharacterPF2e, data: ParsedCharacter) => {
 
 export const purgeFeatsAndFeatures = (actor: CharacterPF2e) => {
   debugLog("purgeFeatsAndFeatures() Removing all feats!");
+  const undeletableFeatTypes = ["ancestryfeatures"];
   return actor.deleteEmbeddedDocuments(
     "Item",
-    actor.data.items.filter((i) => i.type === "feat").map((f) => f.id as string)
+    actor.data.items
+      .filter(
+        (i) =>
+          i.type === "feat" &&
+          !undeletableFeatTypes.includes(
+            (i.data.data as { featType: { value: string } }).featType.value
+          )
+      )
+      .map((f) => f.id as string)
   );
 };

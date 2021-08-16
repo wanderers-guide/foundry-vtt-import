@@ -4,8 +4,13 @@ import { parseWanderersGuideJSON, toCharacter } from "./parser";
 import { UnsupportedVersionError } from "./parser/helpers";
 import { debugLog, registerSetting } from "./utils/module";
 import { addClass, addClassFeatures } from "./converter/class";
-import { addAncestry, addAncestryFeatures } from "./converter/ancestry";
+import {
+  addAncestry,
+  addAncestryFeatures,
+  addHeritageFeat,
+} from "./converter/ancestry";
 import { addBackground, addBackgroundFeatures } from "./converter/background";
+import { addFeats } from "./converter/feats";
 
 Hooks.on("ready", () => {
   registerSetting("debug", {
@@ -138,9 +143,11 @@ async function parseFile(
     await addAncestryFeatures(actor, characterData);
     await addBackgroundFeatures(actor, characterData);
     await addClassFeatures(actor, characterData);
+    await addHeritageFeat(actor, characterData);
     // 3. Update actor stats / text fields / level / skills
     await setAbilitiesAndProficiencies(actor, characterData);
     // 5. Update actor feats (skipping duplicates added by class)
+    await addFeats(actor, characterData);
     // 6. Create spell list?
     // 7. Import spells?
     // 8. Import equipment?

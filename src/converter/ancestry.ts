@@ -108,3 +108,29 @@ export const addAncestryFeatures = async (
 
   return addedFeats;
 };
+
+export const addHeritageFeat = async (
+  actor: CharacterPF2e,
+  data: ParsedCharacter
+) => {
+  const ancestryFeaturesCompendium = await getPF2ECompendiumDocuments(
+    "ancestryfeatures"
+  );
+
+  const heritageFeat = ancestryFeaturesCompendium.find(
+    (feat) => feat.name?.toLowerCase() === data.heritage.name.toLowerCase()
+  );
+
+  if (!heritageFeat) {
+    debugLog("addHeritageFeat() Unable to find heritage feat", {
+      heritage: data.heritage.name,
+    });
+    return;
+  }
+
+  const [createdHeritageFeat] = await actor.createEmbeddedDocuments("Item", [
+    heritageFeat.data,
+  ]);
+
+  return createdHeritageFeat;
+};

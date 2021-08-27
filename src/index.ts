@@ -161,10 +161,10 @@ async function parseFile(
     ]);
     // 2. Add ABC Features!
     await Promise.all([
-      addAncestryFeatures(actor, characterData),
-      addBackgroundFeatures(actor, characterData),
-      addClassFeatures(actor, characterData),
-      addHeritageFeat(actor, characterData),
+      addAncestryFeatures(actor, characterData).catch(() => {}),
+      addBackgroundFeatures(actor, characterData).catch(() => {}),
+      addClassFeatures(actor, characterData).catch(() => {}),
+      addHeritageFeat(actor, characterData).catch(() => {}),
     ]);
     // 3. Update actor stats / text fields / level / skills
     await setAbilitiesAndProficiencies(actor, characterData);

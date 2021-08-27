@@ -6,6 +6,18 @@ import { SourceType } from "../types/wanderers-guide-types";
 import { debugLog, getGame, getPF2ECompendiumDocuments } from "../utils/module";
 
 type FeatTuple = [ItemData, ParsedCharacter["feats"][number]];
+type FeatType =
+  | "classfeature"
+  | "class"
+  | "skill"
+  | "heritage"
+  | "ancestry"
+  | "archetype"
+  | "general";
+type SlottableFeatType = Extract<
+  FeatType,
+  "ancestry" | "archetype" | "class" | "general" | "skill"
+>;
 
 export const getFoundryFeatName = (
   n: string,
@@ -42,17 +54,44 @@ export const addFeats = async (actor: CharacterPF2e, data: ParsedCharacter) => {
       });
       continue;
     }
-
-    featsToAdd = [...featsToAdd, [compendiumFeat.data, feat]];
+    // Stringify and parse to use effectively a copy of the data.
+    featsToAdd = [
+      ...featsToAdd,
+      [JSON.parse(JSON.stringify(compendiumFeat.data)), feat],
+    ];
   }
 
+  let usedLocations: string[] = [];
   const featsAssignedToSlots: ItemData[] = featsToAdd.map(
     ([foundryFeat, sourceFeat]) => {
-      return mapFeatToSlot(
-        [foundryFeat, sourceFeat],
-        actor,
-        !!(game && game.settings.get("pf2e", "freeArchetypeVariant"))
+      let location: string | null = getFoundryFeatLocation(
+        (
+          foundryFeat as unknown as ItemData & {
+            featType?: { value: FeatType };
+          }
+        ).featType?.value,
+        sourceFeat.levelAcquired,
+        sourceFeat.featSource,
+        !!(game && game.settings.get("pf2e", "freeArchetypeVariant")),
+        usedLocations
       );
+
+      if (location === "BACKGROUND") {
+        location = actor.background?.id ?? null;
+      }
+
+      if (location) {
+        usedLocations = [...usedLocations, location];
+        debugLog("Feat Location:", location, foundryFeat);
+      }
+
+      return {
+        ...foundryFeat,
+        data: {
+          ...foundryFeat.data,
+          location,
+        },
+      };
     }
   ) as ItemData[];
 
@@ -74,52 +113,12 @@ export const purgeFeatsAndFeatures = (actor: CharacterPF2e) => {
         (i) =>
           i.type === "feat" &&
           !undeletableFeatTypes.includes(
-            (i.data.data as { featType: { value: string } }).featType.value
+            (i.data.data as { featType: { value: FeatType } }).featType.value
           )
       )
       .map((f) => f.id as string)
   );
 };
-
-const mapFeatToSlot = (
-  [foundryFeat, sourceFeat]: FeatTuple,
-  actor: CharacterPF2e,
-  freeArchetypeVariant?: boolean
-) => {
-  let locationKey: string | null = getFoundryFeatLocation(
-    (foundryFeat.data as { data?: { featType?: { value: FeatType } } })?.data
-      ?.featType?.value,
-    sourceFeat.levelAcquired,
-    sourceFeat.featSource,
-    freeArchetypeVariant
-  );
-
-  if (locationKey === "BACKGROUND") {
-    locationKey = actor.background?.id ?? null;
-  }
-
-  return {
-    ...foundryFeat,
-    data: {
-      ...foundryFeat.data,
-      location: locationKey,
-    },
-  };
-};
-
-type FeatType =
-  | "classfeature"
-  | "class"
-  | "skill"
-  | "heritage"
-  | "ancestry"
-  | "archetype"
-  | "general";
-
-type SlottableFeatType = Extract<
-  FeatType,
-  "ancestry" | "archetype" | "class" | "general" | "skill"
->;
 
 /**
  * @see {@link https://gitlab.com/hooking/foundry-vtt---pathfinder-2e/-/blob/master/src/module/actor/character/sheet.ts#L166}
@@ -128,41 +127,46 @@ const getFoundryFeatLocation = (
   featType: FeatType | SlottableFeatType | undefined,
   level: number,
   featSource?: SourceType,
-  freeArchetypeEnabled: boolean = false
+  freeArchetypeEnabled: boolean = false,
+  usedLocations: string[] = []
 ): `${SlottableFeatType}-${number}` | "BACKGROUND" | null => {
   if (!level || !featType) return null;
-
   const generalFeatLevels = [3, 7, 11, 15, 19];
+  let location: ReturnType<typeof getFoundryFeatLocation> = null;
 
   /**
    * Special case for background feat: feat slot name is the id of the actors background
    * @see {@link https://gitlab.com/hooking/foundry-vtt---pathfinder-2e/-/blob/master/src/module/actor/character/sheet.ts#L407}
    */
   if (featSource === "background" && featType === "skill" && level === 1) {
-    return "BACKGROUND";
+    location = "BACKGROUND";
   }
-
   // Feats that are both general feats and skill feats (like Kip-up) are marked as skill feats.
   // If you had chosen such a feat on a general feat level, put it in the right spot
-  if (
+  else if (
     generalFeatLevels.includes(level) &&
     ["general", "skill"].includes(featType)
   ) {
-    return `general-${level}`;
-  }
-
-  if (
-    freeArchetypeEnabled &&
-    featType === "archetype" &&
-    level >= 2 &&
-    level % 2 === 0
-  ) {
-    return `${featType}-${level}`;
+    location = `general-${level}`;
   } else if (isSlottableFeatType(featType) && featType !== "archetype") {
-    return `${featType}-${level}`;
-  }
+    location = `${featType}-${level}`;
+  } else if (featType === "archetype") {
+    const archetypeLocation = `archetype-${level}` as const;
+    const classLocation = `class-${level}` as const;
+    // If free archetype is on, but we are already using that particular slot
+    // then we will want to try to use the class location instead
+    if (
+      freeArchetypeEnabled &&
+      usedLocations.includes(archetypeLocation) &&
+      !usedLocations.includes(classLocation)
+    ) {
+      location = classLocation;
+    }
 
-  return null;
+    location = freeArchetypeEnabled ? archetypeLocation : classLocation;
+  }
+  // if we are already using the slot, return null. Otherwise let's goooo
+  return usedLocations.includes(location ?? "") ? null : location;
 };
 
 const isSlottableFeatType = (

@@ -7,6 +7,7 @@ import {
   SpellLevel,
   SpellType,
 } from "./system";
+import { SourceType } from "./wanderers-guide-types";
 
 export enum ProficiencyRank {
   UNTRAINED = 0,
@@ -157,7 +158,12 @@ export type ParsedCharacter = {
     >;
     lore: Record<string, ProficiencyRank>;
   };
-  feats: Array<{ name: string; featLevel: number; levelAcquired: number }>;
+  feats: Array<{
+    name: string;
+    featLevel: number;
+    levelAcquired: number;
+    featSource: SourceType;
+  }>;
   spells: Array<{
     name: string;
     level: SpellLevel;

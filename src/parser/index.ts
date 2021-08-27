@@ -69,6 +69,7 @@ export const toCharacter = (wgData: WanderersGuideObject): ParsedCharacter => {
       name: feat.value.name,
       levelAcquired: feat.sourceLevel,
       featLevel: feat.value.level,
+      featSource: feat.sourceType,
     })),
     languages: wgData.build.languages
       .map((language) => language.value.name as ValidLanguage)

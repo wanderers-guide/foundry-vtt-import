@@ -5,7 +5,10 @@ import { Class } from "../types/system";
 import { SourceType } from "../types/wanderers-guide-types";
 import { debugLog, getGame, getPF2ECompendiumDocuments } from "../utils/module";
 
-type FeatTuple = [ItemData, ParsedCharacter["feats"][number]];
+type FeatTuple = [
+  ItemData & { data: { featType?: { value: FeatType } } },
+  ParsedCharacter["feats"][number]
+];
 type FeatType =
   | "classfeature"
   | "class"
@@ -62,14 +65,22 @@ export const addFeats = async (actor: CharacterPF2e, data: ParsedCharacter) => {
   }
 
   let usedLocations: string[] = [];
-  const featsAssignedToSlots: ItemData[] = featsToAdd.map(
-    ([foundryFeat, sourceFeat]) => {
+  const featsAssignedToSlots: ItemData[] = [...featsToAdd]
+    .sort((a, b) => {
+      const [aFeat] = a;
+      const [bFeat] = b;
+      // Let's always add archetype feats last so they do not hog class feat slots.
+      if (aFeat.data.featType?.value === "archetype") {
+        return 1;
+      } else if (bFeat.data.featType?.value === "archetype") {
+        return -1;
+      }
+
+      return 0;
+    })
+    .map(([foundryFeat, sourceFeat]) => {
       let location: string | null = getFoundryFeatLocation(
-        (
-          foundryFeat as unknown as ItemData & {
-            data: { featType?: { value: FeatType } };
-          }
-        ).data.featType?.value,
+        foundryFeat.data.featType?.value,
         sourceFeat.levelAcquired,
         sourceFeat.featSource,
         !!(game && game.settings.get("pf2e", "freeArchetypeVariant")),
@@ -94,8 +105,7 @@ export const addFeats = async (actor: CharacterPF2e, data: ParsedCharacter) => {
           location,
         },
       };
-    }
-  ) as ItemData[];
+    }) as ItemData[];
 
   const createdFeats = await actor.createEmbeddedDocuments(
     "Item",

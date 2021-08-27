@@ -92,12 +92,21 @@ export const addBackgroundFeatures = async (
   for (const feat of backgroundFeatsToAdd) {
     const compendiumFeat = await getCompendiumDocument(feat.pack, feat.id);
     if (!compendiumFeat) {
-      debugLog("addBackgroundFeatures() Unable to find compendium feat", {
-        feat,
-      });
+      debugLog("addBackgroundFeatures() Unable to find compendium feat", feat);
       continue;
     }
-    featDocuments = [...featDocuments, compendiumFeat.data];
+    let location = null;
+    if (feat.pack === "pf2e.feats-srd") {
+      location = background.id;
+    }
+
+    featDocuments = [
+      ...featDocuments,
+      {
+        ...compendiumFeat.data,
+        data: { ...compendiumFeat.data.data, location },
+      },
+    ];
   }
 
   debugLog("addBackgroundFeatures() Adding background features", {

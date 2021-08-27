@@ -87,7 +87,8 @@ const mapFeatToSlot = (
   freeArchetypeVariant?: boolean
 ) => {
   let locationKey: string | null = getFoundryFeatLocation(
-    (foundryFeat.data as any).data.featType.value,
+    (foundryFeat.data as { data?: { featType?: { value: FeatType } } })?.data
+      ?.featType?.value,
     sourceFeat.levelAcquired,
     sourceFeat.featSource,
     freeArchetypeVariant
@@ -124,12 +125,12 @@ type SlottableFeatType = Extract<
  * @see {@link https://gitlab.com/hooking/foundry-vtt---pathfinder-2e/-/blob/master/src/module/actor/character/sheet.ts#L166}
  */
 const getFoundryFeatLocation = (
-  featType: FeatType | SlottableFeatType,
+  featType: FeatType | SlottableFeatType | undefined,
   level: number,
   featSource?: SourceType,
   freeArchetypeEnabled: boolean = false
 ): `${SlottableFeatType}-${number}` | "BACKGROUND" | null => {
-  if (!level) return null;
+  if (!level || !featType) return null;
 
   const generalFeatLevels = [3, 7, 11, 15, 19];
 

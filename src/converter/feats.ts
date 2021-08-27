@@ -278,15 +278,13 @@ const getFoundryFeatLocation = (
     const classLocation = `class-${level}` as const;
     // If free archetype is on, but we are already using that particular slot
     // then we will want to try to use the class location instead
-    if (
-      freeArchetypeEnabled &&
-      usedLocations.includes(archetypeLocation) &&
-      !usedLocations.includes(classLocation)
-    ) {
+    if (freeArchetypeEnabled && usedLocations.includes(archetypeLocation)) {
+      location = classLocation;
+    } else if (freeArchetypeEnabled) {
+      location = archetypeLocation;
+    } else {
       location = classLocation;
     }
-
-    location = freeArchetypeEnabled ? archetypeLocation : classLocation;
   }
   // if we are already using the slot, return null. Otherwise let's goooo
   return usedLocations.includes(location ?? "") ? null : location;

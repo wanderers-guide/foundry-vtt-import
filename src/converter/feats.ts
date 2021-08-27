@@ -64,6 +64,7 @@ export const addFeats = async (actor: CharacterPF2e, data: ParsedCharacter) => {
   let usedLocations: string[] = [];
   const featsAssignedToSlots: ItemData[] = featsToAdd.map(
     ([foundryFeat, sourceFeat]) => {
+      debugLog("Mapping feat", foundryFeat);
       let location: string | null = getFoundryFeatLocation(
         (
           foundryFeat as unknown as ItemData & {
@@ -130,6 +131,13 @@ const getFoundryFeatLocation = (
   freeArchetypeEnabled: boolean = false,
   usedLocations: string[] = []
 ): `${SlottableFeatType}-${number}` | "BACKGROUND" | null => {
+  debugLog("getFoundryFeatLocation()", {
+    featType,
+    level,
+    featSource,
+    freeArchetypeEnabled,
+    usedLocations,
+  });
   if (!level || !featType) return null;
   const generalFeatLevels = [3, 7, 11, 15, 19];
   let location: ReturnType<typeof getFoundryFeatLocation> = null;

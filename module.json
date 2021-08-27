@@ -4,7 +4,7 @@
     "description": "Allows you to import characters exported from https://wanderersguide.app into your games",
     "author": "Renn - Ben#6969",
     "minimumCoreVersion": "0.8.8",
-    "compatibleCoreVersion": "0.8.8",
+    "compatibleCoreVersion": "0.8.9",
     "system": [
         "pf2e"
     ],

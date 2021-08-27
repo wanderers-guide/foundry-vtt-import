@@ -23,9 +23,106 @@ type SlottableFeatType = Extract<
 >;
 
 export const getFoundryFeatName = (
-  n: string,
+  name: string,
   className?: Class | null
-): string => n;
+): string => {
+  switch (className) {
+    case "Alchemist":
+      return getFeatVariant(name, className, ["Efficient Alchemy"]);
+    case "Barbarian":
+      return getFeatVariant(name, className, ["Reckless Abandon"]);
+    case "Bard":
+      return getFeatVariant(name, className, ["Know-It-All", "Soulsight"]);
+    case "Champion":
+      return getFeatVariant(name, className, ["Shield Warden"]);
+    case "Druid":
+      return getFeatVariant(name, className, ["Animal Companion"]);
+    case "Fighter":
+      return getFeatVariant(name, className, [
+        "Attack of Opportunity",
+        "Dueling Dance",
+        "Dueling Parry",
+        "Guardian's Deflection",
+        "Impossible Volley",
+        "Improved Twin Riposte",
+        "Ricochet Stance",
+        "Shield Warden",
+        "Stance Savant",
+        "Twinned Defense",
+      ]);
+    case "Investigator":
+      return getFeatVariant(name, className, [
+        "Implausible Purchase",
+        "Master Spotter",
+        "Predictive Purchase",
+        "Skill Mastery",
+      ]);
+    case "Monk":
+      return getFeatVariant(name, className, [
+        "Shattering Strike",
+        "Stance Savant",
+      ]);
+    case "Ranger":
+      return getFeatVariant(name, className, [
+        "Animal Companion",
+        "Impossible Volley",
+        "Improved Twin Riposte",
+        "Incredible Companion",
+        "Master Spotter",
+        "Mature Animal Companion",
+        "Side by Side",
+        "Specialized Companion",
+      ]);
+    case "Rogue":
+      return getFeatVariant(name, className, [
+        "Evasiveness",
+        "Implausible Purchase",
+        "Predictive Purchase",
+        "Ricochet Stance",
+        "Skill Mastery",
+        "Tumble Behind",
+      ]);
+    case "Sorcerer":
+      return getFeatVariant(name, className, [
+        "Blessed Blood",
+        "Counterspell",
+        "Soulsight",
+      ]);
+    case "Swashbuckler":
+      return getFeatVariant(name, className, [
+        "Dueling Dance",
+        "Dueling Parry",
+        "Evasiveness",
+        "Guardian's Deflection",
+        "Incredible Luck",
+        "Tumble Behind",
+        "Twinned Defense",
+      ]);
+    case "Witch":
+      return getFeatVariant(name, className, [
+        "Counterspell",
+        "Improved Familiar",
+        "Incredible Familiar",
+      ]);
+    case "Wizard":
+      return getFeatVariant(name, className, ["Counterspell"]);
+    default:
+      return name;
+  }
+};
+
+const getFeatVariant = (
+  name: string,
+  className: Class,
+  classSpecificFeats: string[] = []
+) => {
+  const classVariant = `${name} (${className})`;
+  return classSpecificFeats
+    .map((c) => c.toLowerCase())
+    .includes(name.toLowerCase())
+    ? classVariant
+    : name;
+};
 
 export const addFeats = async (actor: CharacterPF2e, data: ParsedCharacter) => {
   const game = getGame();
@@ -51,7 +148,10 @@ export const addFeats = async (actor: CharacterPF2e, data: ParsedCharacter) => {
         convertedName: getFoundryFeatName(feat.name, actorClassName as Class),
       });
       continue;
-    } else if (actorFeats.some((f) => f.name === compendiumFeat.name)) {
+    } else if (
+      featsToAdd.some((f) => f[0]._id === compendiumFeat.id) &&
+      actorFeats.some((f) => f.name === compendiumFeat.name)
+    ) {
       debugLog("addFeats() Skipping duplicate feat!", {
         feat: compendiumFeat,
       });

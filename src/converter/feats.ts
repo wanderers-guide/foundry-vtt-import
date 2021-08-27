@@ -76,6 +76,14 @@ export const addFeats = async (actor: CharacterPF2e, data: ParsedCharacter) => {
         return -1;
       }
 
+      // If the feat is a general feat, we want to ensure that those come first
+      // (since we don't want to accidentally assign a skill feat to a general feat slot).
+      if (aFeat.data.featType?.value === "general") {
+        return -1;
+      } else if (bFeat.data.featType?.value === "general") {
+        return 1;
+      }
+
       return 0;
     })
     .map(([foundryFeat, sourceFeat]) => {
@@ -154,10 +162,13 @@ const getFoundryFeatLocation = (
     location = "BACKGROUND";
   }
   // Feats that are both general feats and skill feats (like Kip-up) are marked as skill feats.
-  // If you had chosen such a feat on a general feat level, put it in the right spot
+  // If you had chosen such a feat on a general feat level, put it in the right spot.
+  // Certain classes (like Investigator) get Skill Feats every level. In this case, we will fall back
+  // to the default feat behaviour of `type-level`, if we had already assigned a general feat.
   else if (
     generalFeatLevels.includes(level) &&
-    ["general", "skill"].includes(featType)
+    ["general", "skill"].includes(featType) &&
+    !usedLocations.includes(`general-${level}`)
   ) {
     location = `general-${level}`;
   } else if (isSlottableFeatType(featType) && featType !== "archetype") {

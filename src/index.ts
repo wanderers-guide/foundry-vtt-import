@@ -54,8 +54,8 @@ Hooks.on(
       return;
     }
 
-    const openImportDialogButton: JQuery<HTMLButtonElement> = $(
-      '<button><i class="fas fa-file-import">Import from Wanderer\'s Guide</button>'
+    const openImportDialogButton: JQuery<HTMLAnchorElement> = $(
+      '<a><i class="fas fa-file-import"></i> Import from Wanderer\'s Guide</a>'
     );
     openImportDialogButton.on("click", () => {
       renderDialogue(actor as CharacterPF2e);

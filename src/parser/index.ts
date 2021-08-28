@@ -6,6 +6,7 @@ import {
 } from "../types/parser";
 import { Ability, AbilityName, CoreSkillTLA, Size } from "../types/system";
 import { WanderersGuideObject } from "../types/wanderers-guide-types";
+import { isDefined, isString } from "../utils/guards";
 import {
   baseSkills,
   getCoreSkillTLA,
@@ -14,6 +15,7 @@ import {
   validLanguages,
   validSenses,
 } from "./helpers";
+import focusSpellData from "../data/wg-focus-spells.json";
 
 export const parseWanderersGuideJSON = (json: string): WanderersGuideObject => {
   const wgData: WanderersGuideObject = JSON.parse(json);
@@ -68,6 +70,15 @@ export const toCharacter = (wgData: WanderersGuideObject): ParsedCharacter => {
       level: spell.spellLevel,
       name: spell._spellName,
     })),
+    focusSpells: wgData.metaData
+      .filter((metadata) => metadata.source === "focusSpell")
+      .map((focusSpellMetaData) => {
+        const [, id] = focusSpellMetaData.value.split("=");
+        return focusSpellData.find((spell) => spell.id === +(id ?? -1));
+      })
+      .filter((spell): spell is ParsedCharacter["focusSpells"][number] => {
+        return isDefined(spell?.id) && isString(spell?.name);
+      }),
     feats: wgData.build.feats.map((feat) => ({
       name: feat.value.name,
       levelAcquired: feat.sourceLevel,

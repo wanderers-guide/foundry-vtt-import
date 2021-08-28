@@ -173,6 +173,10 @@ export type ParsedCharacter = {
     name: string;
     level: SpellLevel;
   }>;
+  focusSpells: Array<{
+    id: number;
+    name: string;
+  }>;
   languages: ValidLanguage[];
   senses: ValidSense[];
   usesFreeArchetype: boolean;

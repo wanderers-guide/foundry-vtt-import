@@ -1,0 +1,1266 @@
+[
+    {
+        "id": 27,
+        "name": "Lay on Hands"
+    },
+    {
+        "id": 28,
+        "name": "Protective Ward"
+    },
+    {
+        "id": 29,
+        "name": "Augment Summoning"
+    },
+    {
+        "id": 30,
+        "name": "Diviner's Sight"
+    },
+    {
+        "id": 31,
+        "name": "Charming Words"
+    },
+    {
+        "id": 32,
+        "name": "Force Bolt"
+    },
+    {
+        "id": 33,
+        "name": "Warped Terrain"
+    },
+    {
+        "id": 34,
+        "name": "Call of the Grave"
+    },
+    {
+        "id": 35,
+        "name": "Physical Boost"
+    },
+    {
+        "id": 67,
+        "name": "Blind Ambition"
+    },
+    {
+        "id": 68,
+        "name": "Competitive Edge"
+    },
+    {
+        "id": 71,
+        "name": "Pushing Gust"
+    },
+    {
+        "id": 72,
+        "name": "Disperse Into Air"
+    },
+    {
+        "id": 73,
+        "name": "Adapt Self"
+    },
+    {
+        "id": 74,
+        "name": "Adaptive Ablation"
+    },
+    {
+        "id": 75,
+        "name": "Face in the Crowd"
+    },
+    {
+        "id": 76,
+        "name": "Pulse of the City"
+    },
+    {
+        "id": 538,
+        "name": "Veil of Confidence"
+    },
+    {
+        "id": 539,
+        "name": "Delusional Pride"
+    },
+    {
+        "id": 540,
+        "name": "Splash of Art"
+    },
+    {
+        "id": 541,
+        "name": "Winter Bolt"
+    },
+    {
+        "id": 542,
+        "name": "Diamond Dust"
+    },
+    {
+        "id": 543,
+        "name": "Artistic Flourish"
+    },
+    {
+        "id": 545,
+        "name": "Cloak of Shadow"
+    },
+    {
+        "id": 546,
+        "name": "Darkened Eyes"
+    },
+    {
+        "id": 547,
+        "name": "Death's Call"
+    },
+    {
+        "id": 549,
+        "name": "Eradicate Undeath"
+    },
+    {
+        "id": 550,
+        "name": "Withering Grasp"
+    },
+    {
+        "id": 551,
+        "name": "Fallow Field"
+    },
+    {
+        "id": 552,
+        "name": "Hyperfocus"
+    },
+    {
+        "id": 553,
+        "name": "Ephemeral Hazards"
+    },
+    {
+        "id": 554,
+        "name": "Cry of Destruction"
+    },
+    {
+        "id": 555,
+        "name": "Destructive Aura"
+    },
+    {
+        "id": 556,
+        "name": "Sweet Dream"
+    },
+    {
+        "id": 557,
+        "name": "Dreamer's Call"
+    },
+    {
+        "id": 558,
+        "name": "Parch"
+    },
+    {
+        "id": 559,
+        "name": "Dust Storm"
+    },
+    {
+        "id": 560,
+        "name": "Oathkeeper's Insignia"
+    },
+    {
+        "id": 561,
+        "name": "Dutiful Challenge"
+    },
+    {
+        "id": 562,
+        "name": "Hurtling Stone"
+    },
+    {
+        "id": 563,
+        "name": "Localized Quake"
+    },
+    {
+        "id": 564,
+        "name": "Soothing Words"
+    },
+    {
+        "id": 565,
+        "name": "Unity"
+    },
+    {
+        "id": 566,
+        "name": "Read Fate"
+    },
+    {
+        "id": 567,
+        "name": "Tempt Fate"
+    },
+    {
+        "id": 568,
+        "name": "Fire Ray"
+    },
+    {
+        "id": 569,
+        "name": "Flame Barrier"
+    },
+    {
+        "id": 570,
+        "name": "Unimpeded Stride"
+    },
+    {
+        "id": 571,
+        "name": "Word of Freedom"
+    },
+    {
+        "id": 572,
+        "name": "Redact"
+    },
+    {
+        "id": 573,
+        "name": "Ghostly Transcription"
+    },
+    {
+        "id": 574,
+        "name": "Healer's Blessing"
+    },
+    {
+        "id": 575,
+        "name": "Rebuke Death"
+    },
+    {
+        "id": 576,
+        "name": "Overstuff"
+    },
+    {
+        "id": 577,
+        "name": "Take Its Course"
+    },
+    {
+        "id": 579,
+        "name": "Scholarly Recollection"
+    },
+    {
+        "id": 580,
+        "name": "Know the Enemy"
+    },
+    {
+        "id": 581,
+        "name": "Charged Javelin"
+    },
+    {
+        "id": 582,
+        "name": "Bottle the Storm"
+    },
+    {
+        "id": 583,
+        "name": "Bit of Luck"
+    },
+    {
+        "id": 584,
+        "name": "Lucky Break"
+    },
+    {
+        "id": 585,
+        "name": "Magic's Vessel"
+    },
+    {
+        "id": 586,
+        "name": "Mystic Beacon"
+    },
+    {
+        "id": 587,
+        "name": "Athletic Rush"
+    },
+    {
+        "id": 588,
+        "name": "Enduring Might"
+    },
+    {
+        "id": 589,
+        "name": "Moonbeam"
+    },
+    {
+        "id": 590,
+        "name": "Touch of the Moon"
+    },
+    {
+        "id": 591,
+        "name": "Vibrant Thorns"
+    },
+    {
+        "id": 592,
+        "name": "Nature's Bounty"
+    },
+    {
+        "id": 593,
+        "name": "Waking Nightmare"
+    },
+    {
+        "id": 594,
+        "name": "Shared Nightmare"
+    },
+    {
+        "id": 595,
+        "name": "Savor the Sting"
+    },
+    {
+        "id": 596,
+        "name": "Retributive Pain"
+    },
+    {
+        "id": 597,
+        "name": "Charming Touch"
+    },
+    {
+        "id": 598,
+        "name": "Captivating Adoration"
+    },
+    {
+        "id": 599,
+        "name": "Perfected Mind"
+    },
+    {
+        "id": 600,
+        "name": "Perfected Form"
+    },
+    {
+        "id": 601,
+        "name": "Divine Plagues"
+    },
+    {
+        "id": 602,
+        "name": "Foul Miasma"
+    },
+    {
+        "id": 603,
+        "name": "Protector's Sacrifice"
+    },
+    {
+        "id": 604,
+        "name": "Protector's Sphere"
+    },
+    {
+        "id": 605,
+        "name": "Share Burden"
+    },
+    {
+        "id": 606,
+        "name": "Font of Serenity"
+    },
+    {
+        "id": 607,
+        "name": "Forced Quiet"
+    },
+    {
+        "id": 608,
+        "name": "Safeguard Secret"
+    },
+    {
+        "id": 609,
+        "name": "Lament"
+    },
+    {
+        "id": 610,
+        "name": "Overflowing Sorrow"
+    },
+    {
+        "id": 611,
+        "name": "Eject Soul"
+    },
+    {
+        "id": 612,
+        "name": "Ectoplasmic Interstice"
+    },
+    {
+        "id": 613,
+        "name": "Zenith Star"
+    },
+    {
+        "id": 614,
+        "name": "Asterism"
+    },
+    {
+        "id": 615,
+        "name": "Dazzling Flash"
+    },
+    {
+        "id": 616,
+        "name": "Positive Luminance"
+    },
+    {
+        "id": 617,
+        "name": "Swarmsense"
+    },
+    {
+        "id": 618,
+        "name": "Swarm Form"
+    },
+    {
+        "id": 619,
+        "name": "Delay Consequence"
+    },
+    {
+        "id": 620,
+        "name": "Stasis"
+    },
+    {
+        "id": 621,
+        "name": "Practice Makes Perfect"
+    },
+    {
+        "id": 622,
+        "name": "Tireless Worker"
+    },
+    {
+        "id": 623,
+        "name": "Agile Feet"
+    },
+    {
+        "id": 624,
+        "name": "Traveler's Transit"
+    },
+    {
+        "id": 625,
+        "name": "Sudden Shift"
+    },
+    {
+        "id": 626,
+        "name": "Trickster's Twin"
+    },
+    {
+        "id": 627,
+        "name": "Word of Truth"
+    },
+    {
+        "id": 628,
+        "name": "Glimpse the Truth"
+    },
+    {
+        "id": 629,
+        "name": "Touch of Obedience"
+    },
+    {
+        "id": 630,
+        "name": "Commanding Lash"
+    },
+    {
+        "id": 631,
+        "name": "Touch of Undeath"
+    },
+    {
+        "id": 632,
+        "name": "Malignant Sustenance"
+    },
+    {
+        "id": 633,
+        "name": "Object Memory"
+    },
+    {
+        "id": 634,
+        "name": "Remember the Lost"
+    },
+    {
+        "id": 635,
+        "name": "Empty Inside"
+    },
+    {
+        "id": 636,
+        "name": "Door to Beyond"
+    },
+    {
+        "id": 637,
+        "name": "Tidal Surge"
+    },
+    {
+        "id": 638,
+        "name": "Downpour"
+    },
+    {
+        "id": 639,
+        "name": "Appearance of Wealth"
+    },
+    {
+        "id": 640,
+        "name": "Precious Metals"
+    },
+    {
+        "id": 641,
+        "name": "Draconic Barrage"
+    },
+    {
+        "id": 642,
+        "name": "Roar of the Wyrm"
+    },
+    {
+        "id": 643,
+        "name": "Weapon Surge"
+    },
+    {
+        "id": 644,
+        "name": "Zeal for Battle"
+    },
+    {
+        "id": 645,
+        "name": "Goodberry"
+    },
+    {
+        "id": 647,
+        "name": "Tempest Surge"
+    },
+    {
+        "id": 648,
+        "name": "Wild Morph"
+    },
+    {
+        "id": 649,
+        "name": "Wild Shape"
+    },
+    {
+        "id": 650,
+        "name": "Stormwind Flight"
+    },
+    {
+        "id": 651,
+        "name": "Primal Summons"
+    },
+    {
+        "id": 652,
+        "name": "Impaling Briars"
+    },
+    {
+        "id": 653,
+        "name": "Storm Lord"
+    },
+    {
+        "id": 654,
+        "name": "Energy Absorption"
+    },
+    {
+        "id": 655,
+        "name": "Dimensional Steps"
+    },
+    {
+        "id": 657,
+        "name": "Dread Aura"
+    },
+    {
+        "id": 658,
+        "name": "Elemental Tempest"
+    },
+    {
+        "id": 659,
+        "name": "Invisibility Cloak"
+    },
+    {
+        "id": 660,
+        "name": "Life Siphon"
+    },
+    {
+        "id": 661,
+        "name": "Shifting Form"
+    },
+    {
+        "id": 662,
+        "name": "Hand of the Apprentice"
+    },
+    {
+        "id": 674,
+        "name": "Vigilant Eye"
+    },
+    {
+        "id": 676,
+        "name": "Counter Performance"
+    },
+    {
+        "id": 677,
+        "name": "Inspire Competence"
+    },
+    {
+        "id": 678,
+        "name": "Inspire Courage"
+    },
+    {
+        "id": 679,
+        "name": "Lingering Composition"
+    },
+    {
+        "id": 680,
+        "name": "Loremaster's Etude"
+    },
+    {
+        "id": 681,
+        "name": "Inspire Defense"
+    },
+    {
+        "id": 682,
+        "name": "Triple Time"
+    },
+    {
+        "id": 683,
+        "name": "Dirge of Doom"
+    },
+    {
+        "id": 684,
+        "name": "Inspire Heroics"
+    },
+    {
+        "id": 685,
+        "name": "House of Imaginary Walls"
+    },
+    {
+        "id": 686,
+        "name": "Allegro"
+    },
+    {
+        "id": 687,
+        "name": "Soothing Ballad"
+    },
+    {
+        "id": 688,
+        "name": "Fatal Aria"
+    },
+    {
+        "id": 690,
+        "name": "Litany Against Wrath"
+    },
+    {
+        "id": 691,
+        "name": "Litany Against Sloth"
+    },
+    {
+        "id": 692,
+        "name": "Champion's Sacrifice"
+    },
+    {
+        "id": 693,
+        "name": "Litany of Righteousness"
+    },
+    {
+        "id": 694,
+        "name": "Hero's Defiance"
+    },
+    {
+        "id": 695,
+        "name": "Tentacular Limbs"
+    },
+    {
+        "id": 696,
+        "name": "Aberrant Whispers"
+    },
+    {
+        "id": 697,
+        "name": "Unusual Anatomy"
+    },
+    {
+        "id": 699,
+        "name": "Angelic Wings"
+    },
+    {
+        "id": 700,
+        "name": "Celestial Brand"
+    },
+    {
+        "id": 701,
+        "name": "Glutton's Jaws"
+    },
+    {
+        "id": 702,
+        "name": "Swamp of Sloth"
+    },
+    {
+        "id": 704,
+        "name": "Abyssal Wrath"
+    },
+    {
+        "id": 705,
+        "name": "Diabolic Edict"
+    },
+    {
+        "id": 706,
+        "name": "Embrace the Pit"
+    },
+    {
+        "id": 707,
+        "name": "Hellfire Plume"
+    },
+    {
+        "id": 709,
+        "name": "Dragon Breath"
+    },
+    {
+        "id": 710,
+        "name": "Dragon Wings"
+    },
+    {
+        "id": 711,
+        "name": "Elemental Toss"
+    },
+    {
+        "id": 712,
+        "name": "Elemental Motion"
+    },
+    {
+        "id": 713,
+        "name": "Elemental Blast"
+    },
+    {
+        "id": 714,
+        "name": "Dragon Claws"
+    },
+    {
+        "id": 715,
+        "name": "Faerie Dust"
+    },
+    {
+        "id": 716,
+        "name": "Fey Disappearance"
+    },
+    {
+        "id": 717,
+        "name": "Fey Glamour"
+    },
+    {
+        "id": 718,
+        "name": "Jealous Hex"
+    },
+    {
+        "id": 719,
+        "name": "Horrific Visage"
+    },
+    {
+        "id": 720,
+        "name": "You're Mine"
+    },
+    {
+        "id": 721,
+        "name": "Ancestral Memories"
+    },
+    {
+        "id": 722,
+        "name": "Extend Spell"
+    },
+    {
+        "id": 723,
+        "name": "Arcane Countermeasure"
+    },
+    {
+        "id": 724,
+        "name": "Undeath's Blessing"
+    },
+    {
+        "id": 725,
+        "name": "Angelic Halo"
+    },
+    {
+        "id": 726,
+        "name": "Drain Life"
+    },
+    {
+        "id": 727,
+        "name": "Grasping Grave"
+    },
+    {
+        "id": 728,
+        "name": "Ki Rush"
+    },
+    {
+        "id": 729,
+        "name": "Ki Strike"
+    },
+    {
+        "id": 730,
+        "name": "Wholeness of Body"
+    },
+    {
+        "id": 731,
+        "name": "Ki Blast"
+    },
+    {
+        "id": 732,
+        "name": "Abundant Step"
+    },
+    {
+        "id": 733,
+        "name": "Wild Winds Stance"
+    },
+    {
+        "id": 734,
+        "name": "Wind Jump"
+    },
+    {
+        "id": 735,
+        "name": "Quivering Palm"
+    },
+    {
+        "id": 736,
+        "name": "Empty Body"
+    },
+    {
+        "id": 742,
+        "name": "Silver's Refrain"
+    },
+    {
+        "id": 746,
+        "name": "Electrified Crystal Ward"
+    },
+    {
+        "id": 747,
+        "name": "Apex Companion"
+    },
+    {
+        "id": 748,
+        "name": "Song of the Fallen"
+    },
+    {
+        "id": 750,
+        "name": "Ancestral Touch"
+    },
+    {
+        "id": 751,
+        "name": "Brain Drain"
+    },
+    {
+        "id": 752,
+        "name": "Call to Arms"
+    },
+    {
+        "id": 753,
+        "name": "Incendiary Aura"
+    },
+    {
+        "id": 754,
+        "name": "Life Link"
+    },
+    {
+        "id": 755,
+        "name": "Soul Siphon"
+    },
+    {
+        "id": 756,
+        "name": "Spray of Stars"
+    },
+    {
+        "id": 757,
+        "name": "Tempest Touch"
+    },
+    {
+        "id": 758,
+        "name": "Vision of Weakness"
+    },
+    {
+        "id": 759,
+        "name": "Access Lore"
+    },
+    {
+        "id": 760,
+        "name": "Ancestral Defense"
+    },
+    {
+        "id": 761,
+        "name": "Armor of Bones"
+    },
+    {
+        "id": 762,
+        "name": "Battlefield Persistence"
+    },
+    {
+        "id": 763,
+        "name": "Delay Affliction"
+    },
+    {
+        "id": 764,
+        "name": "Interstellar Void"
+    },
+    {
+        "id": 765,
+        "name": "Thunderburst"
+    },
+    {
+        "id": 766,
+        "name": "Whirling Flames"
+    },
+    {
+        "id": 767,
+        "name": "Debilitating Dichotomy"
+    },
+    {
+        "id": 768,
+        "name": "Ancestral Form"
+    },
+    {
+        "id": 769,
+        "name": "Claim Undead"
+    },
+    {
+        "id": 770,
+        "name": "Dread Secret"
+    },
+    {
+        "id": 771,
+        "name": "Flaming Fusillade"
+    },
+    {
+        "id": 772,
+        "name": "Heroic Feat"
+    },
+    {
+        "id": 773,
+        "name": "Life-Giving Form"
+    },
+    {
+        "id": 774,
+        "name": "Moonlight Bridge"
+    },
+    {
+        "id": 775,
+        "name": "Tempest Form"
+    },
+    {
+        "id": 777,
+        "name": "Clinging Ice"
+    },
+    {
+        "id": 778,
+        "name": "Discern Secrets"
+    },
+    {
+        "id": 779,
+        "name": "Evil Eye"
+    },
+    {
+        "id": 780,
+        "name": "Nudge Fate"
+    },
+    {
+        "id": 781,
+        "name": "Shroud of Night"
+    },
+    {
+        "id": 782,
+        "name": "Stoke the Heart"
+    },
+    {
+        "id": 783,
+        "name": "Wilding Word"
+    },
+    {
+        "id": 784,
+        "name": "Blood Ward"
+    },
+    {
+        "id": 785,
+        "name": "Cackle"
+    },
+    {
+        "id": 786,
+        "name": "Elemental Betrayal"
+    },
+    {
+        "id": 787,
+        "name": "Life Boost"
+    },
+    {
+        "id": 788,
+        "name": "Needle of Vengeance"
+    },
+    {
+        "id": 789,
+        "name": "Phase Familiar"
+    },
+    {
+        "id": 790,
+        "name": "Veil of Dreams"
+    },
+    {
+        "id": 791,
+        "name": "Deceiver's Cloak"
+    },
+    {
+        "id": 792,
+        "name": "Malicious Shadow"
+    },
+    {
+        "id": 793,
+        "name": "Personal Blizzard"
+    },
+    {
+        "id": 794,
+        "name": "Curse of Death"
+    },
+    {
+        "id": 795,
+        "name": "Restorative Moment"
+    },
+    {
+        "id": 847,
+        "name": "Heal Animal"
+    },
+    {
+        "id": 872,
+        "name": "Beastmaster Trance"
+    },
+    {
+        "id": 873,
+        "name": "Dance of Darkness"
+    },
+    {
+        "id": 874,
+        "name": "Shadow Jump"
+    },
+    {
+        "id": 875,
+        "name": "Shadow Illusion"
+    },
+    {
+        "id": 876,
+        "name": "Hymn of Healing"
+    },
+    {
+        "id": 877,
+        "name": "Song of Strength"
+    },
+    {
+        "id": 878,
+        "name": "Song of Marching"
+    },
+    {
+        "id": 879,
+        "name": "Ode to Ouroboros"
+    },
+    {
+        "id": 880,
+        "name": "Symphony of the Unfettered Heart"
+    },
+    {
+        "id": 881,
+        "name": "Pied Piping"
+    },
+    {
+        "id": 882,
+        "name": "Touch of Corruption"
+    },
+    {
+        "id": 883,
+        "name": "Litany of Self-Interest"
+    },
+    {
+        "id": 884,
+        "name": "Litany of Depravity"
+    },
+    {
+        "id": 885,
+        "name": "Clinging Shadows Stance"
+    },
+    {
+        "id": 886,
+        "name": "Shadow's Web"
+    },
+    {
+        "id": 887,
+        "name": "Medusa's Wrath"
+    },
+    {
+        "id": 888,
+        "name": "Ki Form"
+    },
+    {
+        "id": 889,
+        "name": "Gravity Weapon"
+    },
+    {
+        "id": 890,
+        "name": "Heal Companion"
+    },
+    {
+        "id": 891,
+        "name": "Magic Hide"
+    },
+    {
+        "id": 892,
+        "name": "Snare Hopping"
+    },
+    {
+        "id": 893,
+        "name": "Animal Feature"
+    },
+    {
+        "id": 894,
+        "name": "Hunter's Luck"
+    },
+    {
+        "id": 895,
+        "name": "Soothing Mist"
+    },
+    {
+        "id": 896,
+        "name": "Ephemeral Tracking"
+    },
+    {
+        "id": 897,
+        "name": "Ranger's Bramble"
+    },
+    {
+        "id": 898,
+        "name": "Enlarge Companion"
+    },
+    {
+        "id": 899,
+        "name": "Hunter's Vision"
+    },
+    {
+        "id": 900,
+        "name": "Terrain Transposition"
+    },
+    {
+        "id": 901,
+        "name": "Genie's Veil"
+    },
+    {
+        "id": 902,
+        "name": "Heart's Desire"
+    },
+    {
+        "id": 903,
+        "name": "Wish-Twisted Form"
+    },
+    {
+        "id": 904,
+        "name": "Nymph's Token"
+    },
+    {
+        "id": 905,
+        "name": "Blinding Beauty"
+    },
+    {
+        "id": 906,
+        "name": "Establish Ward"
+    },
+    {
+        "id": 907,
+        "name": "Sepulchral Mask"
+    },
+    {
+        "id": 908,
+        "name": "Spirit Veil"
+    },
+    {
+        "id": 909,
+        "name": "Shepherd of Souls"
+    },
+    {
+        "id": 910,
+        "name": "Dim the Light"
+    },
+    {
+        "id": 911,
+        "name": "Steal Shadow"
+    },
+    {
+        "id": 912,
+        "name": "Consuming Darkness"
+    },
+    {
+        "id": 916,
+        "name": "Spirit Object"
+    },
+    {
+        "id": 929,
+        "name": "Invoke the Crimson Oath"
+    },
+    {
+        "id": 930,
+        "name": "Light of Revelation"
+    },
+    {
+        "id": 931,
+        "name": "Sun Blade"
+    },
+    {
+        "id": 932,
+        "name": "Magic Warrior Aspect"
+    },
+    {
+        "id": 933,
+        "name": "Magic Warrior Transformation"
+    },
+    {
+        "id": 934,
+        "name": "Mantis Form"
+    },
+    {
+        "id": 935,
+        "name": "Perfect Strike"
+    },
+    {
+        "id": 936,
+        "name": "Unblinking Flame Revelation"
+    },
+    {
+        "id": 937,
+        "name": "Unbreaking Wave Advance"
+    },
+    {
+        "id": 938,
+        "name": "Unfolding Wind Rush"
+    },
+    {
+        "id": 939,
+        "name": "Untwisting Iron Buffer"
+    },
+    {
+        "id": 944,
+        "name": "Glacial Heart"
+    },
+    {
+        "id": 945,
+        "name": "Shall Not Rout, Shall Not Falter"
+    },
+    {
+        "id": 949,
+        "name": "Sun's Fury"
+    },
+    {
+        "id": 950,
+        "name": "Achaekek's Clutch"
+    },
+    {
+        "id": 952,
+        "name": "Familiar Form"
+    },
+    {
+        "id": 954,
+        "name": "Spellmaster's Ward"
+    },
+    {
+        "id": 955,
+        "name": "Transcribe Moment"
+    },
+    {
+        "id": 972,
+        "name": "Speaking Sky"
+    },
+    {
+        "id": 973,
+        "name": "Steal the Sky"
+    },
+    {
+        "id": 978,
+        "name": "Ordained Purpose"
+    },
+    {
+        "id": 979,
+        "name": "Split the Tongue"
+    },
+    {
+        "id": 1218,
+        "name": "Fearful Feast"
+    },
+    {
+        "id": 1219,
+        "name": "Lift Nature's Call"
+    },
+    {
+        "id": 1453,
+        "name": "Wronged Monk's Wrath"
+    },
+    {
+        "id": 1454,
+        "name": "Cleansing Flames"
+    },
+    {
+        "id": 1455,
+        "name": "Rejuvenating Flames"
+    },
+    {
+        "id": 1456,
+        "name": "Shroud of Flame"
+    },
+    {
+        "id": 1529,
+        "name": "Stumbling Curse"
+    }
+]

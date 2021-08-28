@@ -36,6 +36,7 @@ export type WanderersGuideObject = {
     | `${string} Lore`,
     undefined | ProficiencyLevel
   >;
+  metaData: WGMetaData[];
 };
 
 type JsonString = string;
@@ -236,3 +237,39 @@ export type Timestamped<T> = T & {
   createdAt: string;
   updatedAt: string;
 };
+
+export type WGMetaData =
+  | Sourceable<
+      Timestamped<{
+        charID: number;
+        value: string;
+      }>,
+      {
+        source:
+          | "focusPoint"
+          | "chosenFeats"
+          | "abilityBonus"
+          | "charTag"
+          | "classChoice"
+          | "languages"
+          | "phyFeats"
+          | "loreCategories"
+          | "proficiencies"
+          | "senses"
+          | "spellKeyAbilities";
+      }
+    >
+  | Sourceable<
+      Timestamped<{
+        charID: number;
+        value: `${string}=${number}`;
+      }>,
+      { source: "focusSpell" }
+    >
+  | Sourceable<
+      Timestamped<{
+        charID: number;
+        value: `${string}=${Uppercase<SpellType>}`;
+      }>,
+      { source: "spellLists" }
+    >;

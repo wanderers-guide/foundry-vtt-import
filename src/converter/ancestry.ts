@@ -89,7 +89,7 @@ export const addAncestryFeatures = async (
     ).items
   ).filter((item) => +item.level <= targetLevel);
 
-  let featDocuments: ItemData[] = [];
+  let featDocuments: FeatPF2e["data"][] = [];
 
   for (const feat of ancestryFeatsToAdd) {
     const compendiumFeat = (await getCompendiumDocument(feat.pack, feat.id)) as

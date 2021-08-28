@@ -232,7 +232,7 @@ export const addFeats = async (actor: CharacterPF2e, data: ParsedCharacter) => {
 
 export const purgeFeatsAndFeatures = (actor: CharacterPF2e) => {
   debugLog("purgeFeatsAndFeatures() Removing all feats!");
-  const undeletableFeatTypes = ["ancestryfeature"];
+  const undeletableFeatTypes: string[] = [];
   return actor.deleteEmbeddedDocuments(
     "Item",
     actor.data.items

@@ -1,7 +1,8 @@
 import { ItemData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/module.mjs";
-import { propEq } from "ramda";
+import { assocPath, propEq } from "ramda";
 import { CharacterPF2e, ItemPF2e } from "../types";
 import { ParsedCharacter } from "../types/parser";
+import { isString } from "../utils/guards";
 import {
   debugLog,
   getCompendiumDocument,
@@ -46,7 +47,7 @@ export const addBackground = async (
     });
     await actor.deleteEmbeddedDocuments(
       "Item",
-      existingBackgrounds.map((c) => c.id as string)
+      existingBackgrounds.map((c) => c.id).filter(isString)
     );
   }
 
@@ -72,7 +73,9 @@ export const addBackgroundFeatures = async (
   actor: CharacterPF2e,
   data: ParsedCharacter
 ) => {
-  const background = actor.items.find((item) => item.type === "background");
+  const background = actor.items.find(propEq("type", "background")) as
+    | ItemPF2e
+    | undefined;
 
   if (!background) {
     throw new Error(
@@ -93,7 +96,10 @@ export const addBackgroundFeatures = async (
   let featDocuments: ItemData[] = [];
 
   for (const feat of backgroundFeatsToAdd) {
-    const compendiumFeat = await getCompendiumDocument(feat.pack, feat.id);
+    const compendiumFeat = (await getCompendiumDocument(
+      feat.pack,
+      feat.id
+    )) as ItemPF2e;
     if (!compendiumFeat) {
       debugLog("addBackgroundFeatures() Unable to find compendium feat", feat);
       continue;
@@ -105,10 +111,7 @@ export const addBackgroundFeatures = async (
 
     featDocuments = [
       ...featDocuments,
-      {
-        ...compendiumFeat.data,
-        data: { ...compendiumFeat.data.data, location },
-      },
+      assocPath(["data", "data", "location"], location, compendiumFeat).data,
     ];
   }
 

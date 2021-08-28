@@ -30,6 +30,7 @@ export const toCharacterUpdateMap = (
   return {
     name: data.name,
     "token.name": data.name,
+    "data.details.keyability.value": data.keyAbility,
     "data.details.heritage.value": data.heritage.name,
     "data.details.level.value": data.level,
     "data.traits.languages.value": data.languages.map((l) => l.toLowerCase()),

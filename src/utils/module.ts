@@ -80,3 +80,15 @@ export async function getPF2ECompendiumDocuments(
 ) {
   return getCompendiumDocuments(`pf2e.${pack}`);
 }
+
+/**
+ * @see {@link https://discord.com/channels/170995199584108546/697845559435853865/880927003467972728 stwlam's post on discord}
+ */
+export const getSlug = (name: string) => {
+  return name
+    .toLowerCase()
+    .replace(/'/g, "")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim()
+    .replace(/[-\s]/g, "-");
+};

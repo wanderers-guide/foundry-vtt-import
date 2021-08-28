@@ -194,7 +194,6 @@ export const addFeats = async (actor: CharacterPF2e, data: ParsedCharacter) => {
       return 0;
     })
     .map(([foundryFeat, sourceFeat]) => {
-      debugLog("LOCATION PRE CALL", { foundryFeat, sourceFeat });
       let location: string | null = getFoundryFeatLocation(
         foundryFeat.data.featType?.value,
         sourceFeat.levelAcquired,
@@ -258,14 +257,6 @@ const getFoundryFeatLocation = (
   freeArchetypeEnabled: boolean = false,
   usedLocations: string[] = []
 ): `${SlottableFeatType}-${number}` | "BACKGROUND" | null => {
-  debugLog(
-    "FEAT LOCATION ENTRY",
-    featType,
-    level,
-    featSource,
-    freeArchetypeEnabled,
-    usedLocations
-  );
   if (!level || !featType) return null;
   const generalFeatLevels = [3, 7, 11, 15, 19];
   let location: ReturnType<typeof getFoundryFeatLocation> = null;

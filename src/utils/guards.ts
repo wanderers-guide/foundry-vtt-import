@@ -7,3 +7,6 @@ export const isNullish = <T>(
 ): thing is null | undefined => {
   return typeof thing === "undefined" || thing === null;
 };
+
+export const isString = (thing: unknown): thing is string =>
+  typeof thing === "string";

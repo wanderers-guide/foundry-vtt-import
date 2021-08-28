@@ -1,4 +1,4 @@
-import { isDefined, isNullish } from "../guards";
+import { isDefined, isNullish, isString } from "../guards";
 
 describe("guards", () => {
   describe(isDefined, () => {
@@ -55,6 +55,35 @@ describe("guards", () => {
 
       nullishThings.forEach((thing) => {
         expect(isNullish(thing)).toBe(true);
+      });
+    });
+  });
+
+  describe(isString, () => {
+    it("returns true for strings, false for everything else", () => {
+      const nonStringThings = [
+        NaN,
+        -Infinity,
+        Infinity,
+        -1,
+        0,
+        1,
+        false,
+        true,
+        undefined,
+        null,
+        () => undefined,
+        [],
+        {},
+      ];
+      const stringThings = ["", "undefined"];
+
+      nonStringThings.forEach((thing) => {
+        expect(isString(thing)).toBe(false);
+      });
+
+      stringThings.forEach((thing) => {
+        expect(isString(thing)).toBe(true);
       });
     });
   });

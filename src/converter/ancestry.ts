@@ -1,4 +1,6 @@
 import { ItemData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/module.mjs";
+import { equals, pipe, prop } from "ramda";
+import { FeatPF2e } from "../types";
 import { CharacterPF2e } from "../types/character-data";
 import { ParsedCharacter } from "../types/parser";
 import {
@@ -6,6 +8,7 @@ import {
   getCompendiumDocument,
   getGame,
   getPF2ECompendiumDocuments,
+  getSlug,
 } from "../utils/module";
 
 // Identical process to what happens in `./class.ts`
@@ -113,23 +116,24 @@ export const addHeritageFeat = async (
   actor: CharacterPF2e,
   data: ParsedCharacter
 ) => {
-  const ancestryFeaturesCompendium = await getPF2ECompendiumDocuments(
+  const ancestryFeaturesCompendium = (await getPF2ECompendiumDocuments(
     "ancestryfeatures"
-  );
+  )) as FeatPF2e[];
 
   const heritageFeat = ancestryFeaturesCompendium.find(
-    (feat) => feat.name?.toLowerCase() === data.heritage.name.toLowerCase()
+    pipe(prop("slug"), equals(getSlug(data.heritage.name)))
   );
 
   if (!heritageFeat) {
     debugLog("addHeritageFeat() Unable to find heritage feat", {
       heritage: data.heritage.name,
+      heritageSlug: getSlug(data.heritage.name),
     });
     return;
   }
 
   const [createdHeritageFeat] = await actor.createEmbeddedDocuments("Item", [
-    heritageFeat.data,
+    heritageFeat.data as Record<string, any>,
   ]);
 
   return createdHeritageFeat;

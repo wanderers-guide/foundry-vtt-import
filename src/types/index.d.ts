@@ -1,5 +1,22 @@
 import "./character-data";
 
-declare global {
-  const actor: CharacterPF2e;
+interface ItemPF2e extends Item {
+  id: string;
+  name: string;
+  slug: string;
+  uuid: string;
+}
+
+interface FeatPF2e extends ItemPF2e {
+  featType: {
+    label: string;
+    value:
+      | "classfeature"
+      | "class"
+      | "skill"
+      | "heritage"
+      | "ancestry"
+      | "archetype"
+      | "general";
+  };
 }

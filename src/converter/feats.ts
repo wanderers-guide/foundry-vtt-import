@@ -1,5 +1,5 @@
 import { ItemData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/module.mjs";
-import { CharacterPF2e } from "../types/character-data";
+import { CharacterPF2e } from "../types";
 import { ParsedCharacter } from "../types/parser";
 import { Class } from "../types/system";
 import { SourceType } from "../types/wanderers-guide-types";

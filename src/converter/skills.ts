@@ -1,5 +1,6 @@
 import Document from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/abstract/document.mjs";
-import { CharacterPF2e } from "../types/character-data";
+import { CharacterPF2e } from "../types";
+
 import { ParsedCharacter } from "../types/parser";
 import { debugLog } from "../utils/module";
 

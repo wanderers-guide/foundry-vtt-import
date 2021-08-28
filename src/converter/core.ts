@@ -1,6 +1,6 @@
-import { CharacterPF2e, CharacterUpdateMap } from "../types/character-data";
+import { CharacterPF2e, CharacterUpdateMap } from "../types";
 import { ParsedCharacter } from "../types/parser";
-import { debugLog, getGame } from "../utils/module";
+import { debugLog } from "../utils/module";
 import { addLoreSkills } from "./skills";
 
 export const updateActor = (

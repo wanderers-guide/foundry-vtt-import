@@ -1,11 +1,13 @@
 import { ItemData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/module.mjs";
-import { CharacterPF2e } from "../types/character-data";
+import { propEq } from "ramda";
+import { CharacterPF2e, ItemPF2e } from "../types";
 import { ParsedCharacter } from "../types/parser";
 import {
   debugLog,
   getCompendiumDocument,
   getGame,
   getPF2ECompendiumDocuments,
+  getSlug,
 } from "../utils/module";
 
 // Identical process to what happens in `./class.ts`
@@ -16,10 +18,10 @@ export const addBackground = async (
 ) => {
   const game = getGame();
   if (!game) return;
-  const backgroundCompendium = await getPF2ECompendiumDocuments("backgrounds");
-  const existingBackgrounds = actor.items.filter(
-    (item) => item.type === "background"
-  );
+  const backgroundCompendium = (await getPF2ECompendiumDocuments(
+    "backgrounds"
+  )) as ItemPF2e[];
+  const existingBackgrounds = actor.items.filter(propEq("type", "background"));
 
   if (!backgroundCompendium.length) {
     debugLog("addBackground() Unable to load pf2e.backgrounds compendium");
@@ -27,18 +29,19 @@ export const addBackground = async (
   }
 
   const backgroundToAdd = backgroundCompendium.find(
-    (c) => c.name?.toLowerCase() === data.background.toLowerCase()
-  ) as Item;
+    propEq("slug", getSlug(data.background))
+  );
 
   if (!backgroundToAdd) {
     debugLog("addBackground() Unable to find background in compendium", {
       background: data.background,
+      slug: getSlug(data.background),
     });
     return;
   }
 
   if (existingBackgrounds.length > 0) {
-    debugLog("addBackground() Deleting existing ancestries", {
+    debugLog("addBackground() Deleting existing backgrounds", {
       existingBackgrounds,
     });
     await actor.deleteEmbeddedDocuments(

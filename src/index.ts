@@ -1,4 +1,3 @@
-import { CharacterPF2e } from "./types/character-data";
 import { setAbilitiesAndProficiencies } from "./converter/core";
 import { parseWanderersGuideJSON, toCharacter } from "./parser";
 import { UnsupportedVersionError } from "./parser/helpers";
@@ -11,6 +10,7 @@ import {
 } from "./converter/ancestry";
 import { addBackground, addBackgroundFeatures } from "./converter/background";
 import { addFeats, purgeFeatsAndFeatures } from "./converter/feats";
+import { CharacterPF2e } from "./types";
 
 Hooks.on("ready", () => {
   registerSetting("debug", {

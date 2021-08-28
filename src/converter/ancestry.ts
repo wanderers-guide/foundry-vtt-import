@@ -1,7 +1,6 @@
 import { ItemData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/module.mjs";
 import { equals, pipe, prop } from "ramda";
-import { FeatPF2e } from "../types";
-import { CharacterPF2e } from "../types/character-data";
+import { CharacterPF2e, FeatPF2e } from "../types";
 import { ParsedCharacter } from "../types/parser";
 import {
   debugLog,

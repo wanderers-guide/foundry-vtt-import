@@ -10,6 +10,13 @@ interface ItemPF2e extends Item {
 }
 
 interface FeatPF2e extends ItemPF2e {
+  data: ItemPF2e["data"] & {
+    data: ItemPF2e["data"]["data"] & {
+      featType: {
+        value: FeatPF2e["featType"]["value"];
+      };
+    };
+  };
   featType: {
     label: string;
     value:

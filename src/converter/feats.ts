@@ -11,7 +11,7 @@ import {
   getSlug,
 } from "../utils/module";
 
-type FeatTuple = [FeatPF2e, ParsedCharacter["feats"][number]];
+type FeatTuple = [FeatPF2e["data"], ParsedCharacter["feats"][number]];
 type FeatType = FeatPF2e["featType"]["value"];
 type SlottableFeatType = Extract<
   FeatType,
@@ -142,7 +142,7 @@ export const addFeats = async (actor: CharacterPF2e, data: ParsedCharacter) => {
   )) as FeatPF2e[];
   const actorFeats = actor.data.items.filter(
     propEq("type", "feat")
-  ) as FeatPF2e[];
+  ) as unknown as FeatPF2e[];
   let featsToAdd: FeatTuple[] = [];
 
   for (const feat of data.feats) {
@@ -158,7 +158,7 @@ export const addFeats = async (actor: CharacterPF2e, data: ParsedCharacter) => {
       });
       continue;
     } else if (
-      featsToAdd.some((f) => f[0].id === compendiumFeat.id) &&
+      featsToAdd.some((f) => f[0]._id === compendiumFeat.id) &&
       actorFeats.some((f) => f.name === compendiumFeat.name)
     ) {
       debugLog("addFeats() Skipping duplicate feat!", compendiumFeat);
@@ -177,25 +177,26 @@ export const addFeats = async (actor: CharacterPF2e, data: ParsedCharacter) => {
       const [aFeat] = a;
       const [bFeat] = b;
       // Let's always add archetype feats last so they do not hog class feat slots.
-      if (aFeat.featType?.value === "archetype") {
+      if (aFeat.data.featType?.value === "archetype") {
         return 1;
-      } else if (bFeat.featType?.value === "archetype") {
+      } else if (bFeat.data.featType?.value === "archetype") {
         return -1;
       }
 
       // If the feat is a general feat, we want to ensure that those come first
       // (since we don't want to accidentally assign a skill feat to a general feat slot).
-      if (aFeat.featType?.value === "general") {
+      if (aFeat.data.featType?.value === "general") {
         return -1;
-      } else if (bFeat.featType?.value === "general") {
+      } else if (bFeat.data.featType?.value === "general") {
         return 1;
       }
 
       return 0;
     })
     .map(([foundryFeat, sourceFeat]) => {
+      debugLog("LOCATION PRE CALL", { foundryFeat, sourceFeat });
       let location: string | null = getFoundryFeatLocation(
-        foundryFeat.featType?.value,
+        foundryFeat.data.featType?.value,
         sourceFeat.levelAcquired,
         sourceFeat.featSource,
         !!(game && game.settings.get("pf2e", "freeArchetypeVariant")),
@@ -257,6 +258,14 @@ const getFoundryFeatLocation = (
   freeArchetypeEnabled: boolean = false,
   usedLocations: string[] = []
 ): `${SlottableFeatType}-${number}` | "BACKGROUND" | null => {
+  debugLog(
+    "FEAT LOCATION ENTRY",
+    featType,
+    level,
+    featSource,
+    freeArchetypeEnabled,
+    usedLocations
+  );
   if (!level || !featType) return null;
   const generalFeatLevels = [3, 7, 11, 15, 19];
   let location: ReturnType<typeof getFoundryFeatLocation> = null;

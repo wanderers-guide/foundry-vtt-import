@@ -43,6 +43,7 @@ describe("Parser", () => {
         level: 10,
         class: "Monk",
         classDC: 29,
+        keyAbility: "dex",
         hitpoints: {
           current: 56,
           temp: 69,
@@ -274,6 +275,7 @@ describe("Parser", () => {
         level: 3,
         class: "Witch",
         classDC: 19,
+        keyAbility: "int",
         hitpoints: {
           current: 32,
           temp: 0,

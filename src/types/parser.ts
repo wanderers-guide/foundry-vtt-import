@@ -129,6 +129,7 @@ export type ParsedCharacter = {
   level: number;
   class: Class;
   classDC: number;
+  keyAbility?: Lowercase<Ability>;
   ancestry: {
     name: string;
     size: Lowercase<Size>;

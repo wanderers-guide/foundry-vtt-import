@@ -144,10 +144,15 @@ async function parseFile(
   actor: CharacterPF2e,
   options: ParseFileOptions
 ) {
-  debugLog("Begin parseFile");
+  debugLog("Begin parseFile", { actor, options, event });
   try {
     const parsedFile = parseWanderersGuideJSON(`${event.target?.result}`);
     const characterData = toCharacter(parsedFile);
+
+    debugLog("parseFile() Parsed character data...", {
+      parsedFile,
+      characterData,
+    });
 
     if (options.purgeFeats) {
       await purgeFeatsAndFeatures(actor);

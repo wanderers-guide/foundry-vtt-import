@@ -42,6 +42,9 @@ export const toCharacter = (wgData: WanderersGuideObject): ParsedCharacter => {
     level: wgData.character.level,
     class: wgData.character._class.name,
     classDC: wgData.stats.totalClassDC,
+    keyAbility: wgData.build.boosts
+      .find((boost) => boost.sourceCode === "keyAbility")
+      ?.Ability.toLowerCase() as Lowercase<Ability> | undefined,
     hitpoints: {
       current: wgData.character.currentHealth ?? wgData.stats.maxHP,
       max: wgData.stats.maxHP,

@@ -2,14 +2,14 @@ import EmbeddedCollection from "@league-of-foundry-developers/foundry-vtt-types/
 import { ActorData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/module.mjs";
 import { ProficiencyRank } from "./parser";
 
-type ItemPF2e = Item & {
+interface ItemPF2e extends Item {
   id: string;
   name: string;
   slug: string;
   uuid: string;
-};
+}
 
-type FeatPF2e = ItemPF2e & {
+interface FeatPF2e extends ItemPF2e {
   featType: {
     label: string;
     value:
@@ -21,7 +21,7 @@ type FeatPF2e = ItemPF2e & {
       | "archetype"
       | "general";
   };
-};
+}
 
 interface CharacterPF2e extends Actor {
   class: ItemPF2e | null;

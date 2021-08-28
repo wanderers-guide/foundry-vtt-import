@@ -1,7 +1,8 @@
 import { toCharacterUpdateMap, updateActor } from "../core";
 import { importGuidechar } from "../../../testUtils";
-import { CharacterPF2e, CharacterUpdateMap } from "../../types/character-data";
+
 import { parseWanderersGuideJSON, toCharacter } from "../../parser";
+import { CharacterPF2e, CharacterUpdateMap } from "../../types";
 
 describe(updateActor, () => {
   const mockActor: Pick<CharacterPF2e, "update"> = {

@@ -1,22 +1,18 @@
 import { ItemData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/module.mjs";
-import { CharacterPF2e } from "../types";
+import { propEq } from "ramda";
+import { CharacterPF2e, FeatPF2e } from "../types";
 import { ParsedCharacter } from "../types/parser";
 import { Class } from "../types/system";
 import { SourceType } from "../types/wanderers-guide-types";
-import { debugLog, getGame, getPF2ECompendiumDocuments } from "../utils/module";
+import {
+  debugLog,
+  getGame,
+  getPF2ECompendiumDocuments,
+  getSlug,
+} from "../utils/module";
 
-type FeatTuple = [
-  ItemData & { data: { featType?: { value: FeatType } } },
-  ParsedCharacter["feats"][number]
-];
-type FeatType =
-  | "classfeature"
-  | "class"
-  | "skill"
-  | "heritage"
-  | "ancestry"
-  | "archetype"
-  | "general";
+type FeatTuple = [FeatPF2e, ParsedCharacter["feats"][number]];
+type FeatType = FeatPF2e["featType"]["value"];
 type SlottableFeatType = Extract<
   FeatType,
   "ancestry" | "archetype" | "class" | "general" | "skill"
@@ -107,21 +103,32 @@ export const getFoundryFeatName = (
     case "Wizard":
       return getFeatVariant(name, className, ["Counterspell"]);
     default:
-      return name;
+      return getSlug(name);
   }
 };
 
-const getFeatVariant = (
-  name: string,
+/**
+ *
+ * @param wanderersGuideFeatName The name of the feat from wanderer's guide
+ * @param className The name of the class (Monk, Alchemist, Investigator, etc)
+ * @param featsWithClassSpecificVariations Feats that have class specific variations in Foundry (Predictive Purchase (Investigator), Predictive Purchase (Rogue))
+ * @returns The slug for the class specific variation (if any), or the slug for the feat.
+ * @example ```ts
+ * const featSlug = getFeatVariant("Predictive Purchase", "Investigator", ["Predictive Purchase", "Implausible Purchase"]); // predictive-purchase-investigator
+ * const featSlug = getFeatVariant("Some Other Feat", "Investigator", ["Predictive Purchase", "Implausible Purchase"]); // some-other-feat
+ * ```
+ */
+export const getFeatVariant = (
+  wanderersGuideFeatName: string,
   className: Class,
-  classSpecificFeats: string[] = []
+  featsWithClassSpecificVariations: string[] = []
 ) => {
-  const classVariant = `${name} (${className})`;
-  return classSpecificFeats
+  const classVariant = `${wanderersGuideFeatName} (${className})`;
+  return featsWithClassSpecificVariations
     .map((c) => c.toLowerCase())
-    .includes(name.toLowerCase())
-    ? classVariant
-    : name;
+    .includes(wanderersGuideFeatName.toLowerCase())
+    ? getSlug(classVariant)
+    : getSlug(wanderersGuideFeatName);
 };
 
 export const addFeats = async (actor: CharacterPF2e, data: ParsedCharacter) => {
@@ -130,31 +137,31 @@ export const addFeats = async (actor: CharacterPF2e, data: ParsedCharacter) => {
     | Class
     | null
     | undefined;
-  const compendiumFeats = await getPF2ECompendiumDocuments("feats-srd");
-  const actorFeats: Item[] = actor.data.items.filter((i) => i.type === "feat");
+  const compendiumFeats = (await getPF2ECompendiumDocuments(
+    "feats-srd"
+  )) as FeatPF2e[];
+  const actorFeats = actor.data.items.filter(
+    propEq("type", "feat")
+  ) as FeatPF2e[];
   let featsToAdd: FeatTuple[] = [];
 
   for (const feat of data.feats) {
     const compendiumFeat = compendiumFeats.find(
-      (item) =>
-        item.name?.toLowerCase() ===
-        getFoundryFeatName(feat.name, actorClassName).toLowerCase()
+      propEq("slug", getFoundryFeatName(feat.name, actorClassName))
     );
 
     if (!compendiumFeat) {
       debugLog("addFeats() Cannot find feat!", {
         name: feat.name,
         actorClassName,
-        convertedName: getFoundryFeatName(feat.name, actorClassName as Class),
+        slug: getFoundryFeatName(feat.name, actorClassName as Class),
       });
       continue;
     } else if (
-      featsToAdd.some((f) => f[0]._id === compendiumFeat.id) &&
+      featsToAdd.some((f) => f[0].id === compendiumFeat.id) &&
       actorFeats.some((f) => f.name === compendiumFeat.name)
     ) {
-      debugLog("addFeats() Skipping duplicate feat!", {
-        feat: compendiumFeat,
-      });
+      debugLog("addFeats() Skipping duplicate feat!", compendiumFeat);
       continue;
     }
     // Stringify and parse to use effectively a copy of the data.
@@ -165,22 +172,22 @@ export const addFeats = async (actor: CharacterPF2e, data: ParsedCharacter) => {
   }
 
   let usedLocations: string[] = [];
-  const featsAssignedToSlots: ItemData[] = [...featsToAdd]
+  const featsAssignedToSlots = [...featsToAdd]
     .sort((a, b) => {
       const [aFeat] = a;
       const [bFeat] = b;
       // Let's always add archetype feats last so they do not hog class feat slots.
-      if (aFeat.data.featType?.value === "archetype") {
+      if (aFeat.featType?.value === "archetype") {
         return 1;
-      } else if (bFeat.data.featType?.value === "archetype") {
+      } else if (bFeat.featType?.value === "archetype") {
         return -1;
       }
 
       // If the feat is a general feat, we want to ensure that those come first
       // (since we don't want to accidentally assign a skill feat to a general feat slot).
-      if (aFeat.data.featType?.value === "general") {
+      if (aFeat.featType?.value === "general") {
         return -1;
-      } else if (bFeat.data.featType?.value === "general") {
+      } else if (bFeat.featType?.value === "general") {
         return 1;
       }
 
@@ -188,7 +195,7 @@ export const addFeats = async (actor: CharacterPF2e, data: ParsedCharacter) => {
     })
     .map(([foundryFeat, sourceFeat]) => {
       let location: string | null = getFoundryFeatLocation(
-        foundryFeat.data.featType?.value,
+        foundryFeat.featType?.value,
         sourceFeat.levelAcquired,
         sourceFeat.featSource,
         !!(game && game.settings.get("pf2e", "freeArchetypeVariant")),
@@ -213,7 +220,7 @@ export const addFeats = async (actor: CharacterPF2e, data: ParsedCharacter) => {
           location,
         },
       };
-    }) as ItemData[];
+    });
 
   const createdFeats = await actor.createEmbeddedDocuments(
     "Item",

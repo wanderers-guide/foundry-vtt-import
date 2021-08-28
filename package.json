@@ -22,5 +22,8 @@
   "scripts": {
     "test": "jest",
     "build": "parcel build src/index.ts --out-dir build --out-file module.js --no-source-maps"
+  },
+  "dependencies": {
+    "ramda": "^0.27.1"
   }
 }

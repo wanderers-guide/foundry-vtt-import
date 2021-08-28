@@ -1,6 +1,6 @@
 import { ItemData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/module.mjs";
 import { assocPath, propEq } from "ramda";
-import { CharacterPF2e, ItemPF2e } from "../types";
+import { CharacterPF2e, FeatPF2e, ItemPF2e } from "../types";
 import { ParsedCharacter } from "../types/parser";
 import { isString } from "../utils/guards";
 import {
@@ -96,10 +96,10 @@ export const addBackgroundFeatures = async (
   let featDocuments: ItemData[] = [];
 
   for (const feat of backgroundFeatsToAdd) {
-    const compendiumFeat = (await getCompendiumDocument(
-      feat.pack,
-      feat.id
-    )) as ItemPF2e;
+    const compendiumFeat = (await getCompendiumDocument(feat.pack, feat.id)) as
+      | FeatPF2e
+      | null
+      | undefined;
     if (!compendiumFeat) {
       debugLog("addBackgroundFeatures() Unable to find compendium feat", feat);
       continue;

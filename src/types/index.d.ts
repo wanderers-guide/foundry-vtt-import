@@ -23,8 +23,25 @@ interface FeatPF2e extends ItemPF2e {
   };
 }
 
+interface ClassPF2e extends ItemPF2e {
+  data: ItemPF2e["data"] & {
+    data: ItemPF2e["data"]["data"] & {
+      items: Record<
+        string,
+        {
+          level: number | string;
+          id: string;
+          pack: string;
+          name: string;
+          img: string;
+        }
+      >;
+    };
+  };
+}
+
 interface CharacterPF2e extends Actor {
-  class: ItemPF2e | null;
+  class: ClassPF2e | null;
   background: ItemPF2e | null;
   update(data: CharacterUpdateMap): Promise<CharacterPF2e | undefined>;
 }

@@ -92,7 +92,10 @@ export const addAncestryFeatures = async (
   let featDocuments: ItemData[] = [];
 
   for (const feat of ancestryFeatsToAdd) {
-    const compendiumFeat = await getCompendiumDocument(feat.pack, feat.id);
+    const compendiumFeat = (await getCompendiumDocument(feat.pack, feat.id)) as
+      | FeatPF2e
+      | null
+      | undefined;
     if (!compendiumFeat) {
       debugLog("addAncestryFeatures() Unable to find compendium feat", {
         feat,

@@ -33,7 +33,7 @@ https://raw.githubusercontent.com/bLittle1996/foundry-vtt-wanderers-guide-charac
 
 ## How to use:
 
-On a character sheet you are the owner of (recommended to use a freshly created on, ask your GM to make a new one for you if necessary), select the `Import from Wanderer's Guide` button in the title bar. Then, follow the instructions in the dialog that pops up. That's it. See the gif below for a visual:
+On a character sheet you are the owner of (recommended to use a freshly created one, ask your GM to make a new one for you if necessary), select the `Import from Wanderer's Guide` button in the title bar. Then, follow the instructions in the dialog that pops up. That's it. See the gif below for a visual:
 
 ![How to use the module](readme-images/how-to-use-module.gif)
 

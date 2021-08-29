@@ -268,6 +268,28 @@ describe("Parser", () => {
           },
         ]),
         spells: [],
+        focusSpells: expect.arrayContaining([
+          {
+            id: 729,
+            name: "Ki Strike",
+          },
+          {
+            id: 728,
+            name: "Ki Rush",
+          },
+          {
+            id: 731,
+            name: "Ki Blast",
+          },
+          {
+            id: 732,
+            name: "Abundant Step",
+          },
+          {
+            id: 973,
+            name: "Steal the Sky",
+          },
+        ]),
         usesFreeArchetype: true,
       };
       const parsedHaruya: ParsedCharacter = {
@@ -516,6 +538,7 @@ describe("Parser", () => {
             level: 2,
           },
         ]),
+        focusSpells: expect.arrayContaining([]),
         usesFreeArchetype: true,
       };
 

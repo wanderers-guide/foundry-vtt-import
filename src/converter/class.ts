@@ -1,4 +1,3 @@
-import { ItemData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/module.mjs";
 import { propEq } from "ramda";
 import { CharacterPF2e, FeatPF2e, ItemPF2e } from "../types";
 import { ParsedCharacter } from "../types/parser";
@@ -51,13 +50,6 @@ export const addClass = async (actor: CharacterPF2e, data: ParsedCharacter) => {
   return addedClass;
 };
 
-type ClassDataFeat = {
-  level: number | string;
-  id: string;
-  pack: string;
-  name: string;
-  img: string;
-};
 /**
  * @see https://gitlab.com/hooking/foundry-vtt---pathfinder-2e/-/blob/master/src/module/item/abc/abc-manager.ts#L53
  */
@@ -79,7 +71,7 @@ export const addClassFeatures = async (
     (item) => +item.level <= targetLevel
   );
 
-  let featDocuments: ItemData[] = [];
+  let featDocuments: FeatPF2e["data"][] = [];
 
   for (const feat of classFeatsToAdd) {
     const compendiumFeat = (await getCompendiumDocument(feat.pack, feat.id)) as

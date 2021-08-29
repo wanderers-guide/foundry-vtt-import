@@ -16,12 +16,16 @@
     "@types/ramda": "^0.27.41",
     "jest": "^27.0.6",
     "parcel-bundler": "^1.12.5",
+    "ts-loader": "^9.2.5",
     "ts-node": "^10.0.0",
-    "typescript": "^4.3.4"
+    "typescript": "^4.3.4",
+    "webpack": "^5.51.1",
+    "webpack-cli": "^4.8.0"
   },
   "scripts": {
     "test": "jest",
-    "build": "parcel build src/index.ts --out-dir build --out-file module.js --no-source-maps"
+    "build:parcel": "parcel build src/index.ts --out-dir build --out-file module.js --no-source-maps",
+    "build": "webpack --mode production"
   },
   "dependencies": {
     "ramda": "^0.27.1"

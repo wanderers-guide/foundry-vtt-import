@@ -1,4 +1,3 @@
-import { ItemData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/module.mjs";
 import { assocPath, propEq } from "ramda";
 import { CharacterPF2e, FeatPF2e, ItemPF2e } from "../types";
 import { ParsedCharacter } from "../types/parser";
@@ -93,7 +92,7 @@ export const addBackgroundFeatures = async (
     ).items
   ).filter((item) => +item.level <= targetLevel);
 
-  let featDocuments: ItemData[] = [];
+  let featDocuments: FeatPF2e["data"][] = [];
 
   for (const feat of backgroundFeatsToAdd) {
     const compendiumFeat = (await getCompendiumDocument(feat.pack, feat.id)) as
